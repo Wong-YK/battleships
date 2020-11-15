@@ -52,7 +52,17 @@ def test_place_ship_at1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {})]
-    assert type(place_ship_at(0, 0, True, 1, f))==list
+    f_1 = [(0, 0, True, 4, {}),
+           (2, 0, True, 3, {}),
+           (2, 4, True, 3, {}),
+           (4, 0, True, 2, {}),
+           (4, 3, True, 2, {}),
+           (4, 6, True, 2, {}),
+           (6, 0, True, 1, {}),
+           (6, 2, True, 1, {}),
+           (6, 4, True, 1, {}),
+           (6, 6, True, 1, {})]
+    assert place_ship_at(6, 0, True, 1, f)==f_1
     #provide at least five tests in total for place_ship_at by the project submission deadline
 
 def test_check_if_hits1():
@@ -66,8 +76,9 @@ def test_check_if_hits1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {}),
-         (6, 4, True, 1, {})]
-    assert type(check_if_hits(0, 0, f))==bool
+         (6, 4, True, 1, {}),
+         (6, 6, True, 1, {})]
+    assert check_if_hits(0, 0, f)==True
     #provide at least five tests in total for check_if_hits by the project submission deadline
 
 def test_hit1():
@@ -81,8 +92,21 @@ def test_hit1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {}),
-         (6, 4, True, 1, {})]
-    assert type(hit(0, 0, f))==tuple
+         (6, 4, True, 1, {}),
+         (6, 6, True, 1, {})]
+    s = (6, 6, True, 1, {})
+    f_1 = [(0, 0, True, 4, {}),
+          (2, 0, True, 3, {}),
+          (2, 4, True, 3, {}),
+          (4, 0, True, 2, {}),
+          (4, 3, True, 2, {}),
+          (4, 6, True, 2, {}),
+          (6, 0, True, 1, {}),
+          (6, 2, True, 1, {}),
+          (6, 4, True, 1, {}),
+          (6, 4, True, 1, {}),
+          (6, 6, True, 1, {(6,6)})]
+    assert type(hit(0, 0, f))==(f_1, s)
     #provide at least five tests in total for hit by the project submission deadline
 
 def test_are_unsunk_ships_left1():
@@ -96,7 +120,8 @@ def test_are_unsunk_ships_left1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {}),
-         (6, 4, True, 1, {})]
-    assert type(are_unsunk_ships_left(f))==bool
+         (6, 4, True, 1, {}),
+         (6, 6, True, 1, {(6, 6)})]
+    assert are_unsunk_ships_left(f)==True
     #provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
     
