@@ -1,17 +1,29 @@
-#see the readme.md file for description and data 
-
+#see the readme.md file for description and data
 
 def is_sunk(ship):
-    #remove pass and add your implementation
-    pass
+    return ship[3]==len(ship[4])
 
 def ship_type(ship):
-    #remove pass and add your implementation
-    pass
+    if ship[3]==4:
+        return "battleship"
+    elif ship[3]==3:
+        return "cruiser"
+    elif ship[3]==2:
+        return "destroyer"
+    else:
+        return "submarine"
 
 def is_open_sea(row, column, fleet):
-    #remove pass and add your implementation
-    pass
+    ship_squares=set()
+    #record sqaures which contain part of a ship
+    for ship in fleet:
+        if ship[2]:
+            for i in range(ship[3]):
+                ship_squares|{(ship[0], (ship[1]+i))}
+        else:
+            for i in range(ship[3]):
+                ship_squares|{((ship[0]+i), ship[1])}
+    return ((row, column) in ship_squares)==True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     #remove pass and add your implementation
