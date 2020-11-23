@@ -18,8 +18,8 @@ def is_open_sea(row, column, fleet):
     #record sqaures which contain part of a ship
     for ship in fleet:
         if ship[2]:
-            for i in range(ship[3]):
-                ship_squares|{(ship[0], (ship[1]+i))}
+            for i in range(-1, ship[3]+1):
+                ship_squares|{(ship[0], (ship[1]+i)), (ship[0]-1, ship[1]+i), (ship[0]+1, ship[1]+i)}
         else:
             for i in range(ship[3]):
                 ship_squares|{((ship[0]+i), ship[1])}
