@@ -68,6 +68,25 @@ def test_is_open_sea4():
     for coord in coords:
         assert is_open_sea(coord[0], coord[1], f)==False
 
+def test_is_open_sea5():
+    f = [(6, 0, False, 4, {}),
+         (7, 2, True, 3, {}),
+         (3, 2, True, 3, {}),
+         (8, 4, True, 2, {}),
+         (5, 4, True, 2, {}),
+         (2, 4, True, 2, {}),
+         (2, 9, True, 1, {}),
+         (6, 7, True, 1, {}),
+         (6, 5, True, 1, {}),
+         (6, 3, True, 1, {})]
+    coords = [(2, 1), (2, 2), (2, 3),
+              (3, 1), (3, 2), (3, 3),
+              (4, 1), (4, 2), (4, 3),
+              (5, 1), (5, 2), (5, 3),
+              (6, 1), (6, 2), (6, 3)]
+    for coord in coords:
+        assert is_open_sea(coord[0], coord[1], f)==False
+
 def test_ok_to_place_ship_at1():
     #add at least one test for ok_to_place_ship_at by the deadline of session 7 assignment
     f = [(0, 0, True, 4, {}),
