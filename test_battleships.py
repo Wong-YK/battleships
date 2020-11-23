@@ -38,7 +38,7 @@ def test_is_open_sea2():
          (6, 6, True, 1, {})]
     assert (is_open_sea(4, 0, f) and is_open_sea(4, 1, f))==False
 
-def test_is_open_sea2():
+def test_is_open_sea3():
     f = [(6, 0, False, 4, {}),
          (7, 2, True, 3, {}),
          (3, 2, True, 3, {}),
@@ -50,6 +50,20 @@ def test_is_open_sea2():
          (6, 5, True, 1, {}),
          (6, 3, True, 1, {})]
     assert (is_open_sea(3, 2, f) and is_open_sea(4, 2, f) and is_open_sea(5, 2, f))==False
+
+def test_is_open_sea4():
+    f = [(6, 0, False, 4, {}),
+         (7, 2, True, 3, {}),
+         (3, 2, True, 3, {}),
+         (8, 4, True, 2, {}),
+         (5, 4, True, 2, {}),
+         (2, 4, True, 2, {}),
+         (2, 9, True, 1, {}),
+         (6, 7, True, 1, {}),
+         (6, 5, True, 1, {}),
+         (6, 3, True, 1, {})]
+    for coords in [(1, 3), (1, 4), (1, 5), (2, 3), (2, 5), (3, 3), (3, 5), (4, 3), (4, 4), (4, 5)]:
+        assert is_open_sea(coords[0], coords[1], f)
 
 def test_ok_to_place_ship_at1():
     #add at least one test for ok_to_place_ship_at by the deadline of session 7 assignment
