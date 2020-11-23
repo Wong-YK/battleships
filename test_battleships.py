@@ -98,7 +98,7 @@ def test_ok_to_place_ship_at1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {})]
-    assert type(ok_to_place_ship_at(6, 6, True, 1, f))==True
+    assert ok_to_place_ship_at(6, 6, True, 1, f)==True
     #provide at least five tests in total for ok_to_place_ship_at by the project submission deadline
 
 def test_place_ship_at1():
