@@ -88,7 +88,7 @@ def test_is_open_sea5():
         assert is_open_sea(coord[0], coord[1], f)==False
 
 def test_ok_to_place_ship_at1():
-    #add at least one test for ok_to_place_ship_at by the deadline of session 7 assignment
+    #no overlap, no adjacent squares
     f = [(0, 0, True, 4, {}),
          (2, 0, True, 3, {}),
          (2, 4, True, 3, {}),
@@ -98,8 +98,20 @@ def test_ok_to_place_ship_at1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {})]
-    assert ok_to_place_ship_at(6, 6, True, 1, f)==True
-    #provide at least five tests in total for ok_to_place_ship_at by the project submission deadline
+    assert ok_to_place_ship_at(6, 6, True, 1, f)==False
+
+def test_ok_to_place_ship_at2():
+    #overlap
+    f = [(0, 0, True, 4, {}),
+         (2, 0, True, 3, {}),
+         (2, 4, True, 3, {}),
+         (4, 0, True, 2, {}),
+         (4, 6, True, 2, {}),
+         (6, 0, True, 1, {}),
+         (6, 2, True, 1, {}),
+         (6, 4, True, 1, {}),
+         (6, 6, True, 1, {})]
+    assert ok_to_place_ship_at(1, 6, False, 2, f) == True
 
 def test_place_ship_at1():
     #add at least one test for place_ship_at by the deadline of session 7 assignment
