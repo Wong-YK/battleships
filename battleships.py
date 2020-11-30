@@ -15,7 +15,6 @@ def ship_type(ship):
 
 def is_open_sea(row, column, fleet):
     ship_squares=set()
-    #record sqaures which contain part of a ship
     for ship in fleet:
         if ship[2]:
             for i in range(-1, ship[3]+1):
@@ -26,7 +25,6 @@ def is_open_sea(row, column, fleet):
     return ((row, column) in ship_squares)==True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
-    #remove pass and add your implementation
     ship_coords = set()
     if horizontal:
         for i in range(length):
@@ -36,7 +34,7 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
             ship_coords|{(row+i, column)}
     ok = True
     for coord in ship_coords:
-       ok = is_open_sea(coord[0], coord[1], fleet)
+       if not is_open_sea(coord[0], coord[1], fleet): ok = False
     return ok
 
 
