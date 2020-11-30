@@ -18,26 +18,25 @@ def is_open_sea(row, column, fleet):
     for ship in fleet:
         if ship[2]:
             for i in range(-1, ship[3]+1):
-                ship_squares|{(ship[0], (ship[1]+i)), ((ship[0]-1), (ship[1]+i)), ((ship[0]+1), (ship[1]+i))}
+                ship_squares|={(ship[0], (ship[1]+i)), ((ship[0]-1), (ship[1]+i)), ((ship[0]+1), (ship[1]+i))}
         else:
             for i in range(-1, ship[3]+1):
-                ship_squares|{((ship[0]+i), ship[1]), ((ship[0]+i), (ship[1]-1)), ((ship[0]+i), (ship[1]+1))}
+                ship_squares|={((ship[0]+i), ship[1]), ((ship[0]+i), (ship[1]-1)), ((ship[0]+i), (ship[1]+1))}
     return ((row, column) in ship_squares)==True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     ship_coords = set()
     if horizontal:
         for i in range(length):
-            ship_coords|{(row, column+i)}
+            ship_coords|={(row, column+i)}
     else:
         for i in range(length):
-            ship_coords|{(row+i, column)}
+            ship_coords|={(row+i, column)}
     ok = True
+    print(ship_coords)
     for coord in ship_coords:
-       if not is_open_sea(coord[0], coord[1], fleet): ok = False
+        if not is_open_sea(coord[0], coord[1], fleet): ok = False
     return ok
-
-
 
 def place_ship_at(row, column, horizontal, length, fleet):
     #remove pass and add your implementation
