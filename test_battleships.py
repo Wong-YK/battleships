@@ -36,7 +36,7 @@ def test_is_open_sea2():
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {}),
          (6, 6, True, 1, {})]
-    assert (is_open_sea(4, 0, f) and is_open_sea(4, 1, f))==False
+    assert (is_open_sea(4, 0, f) or is_open_sea(4, 1, f))==False
 
 def test_is_open_sea3():
     f = [(6, 0, False, 4, {}),
@@ -49,7 +49,7 @@ def test_is_open_sea3():
          (6, 7, True, 1, {}),
          (6, 5, True, 1, {}),
          (6, 3, True, 1, {})]
-    assert (is_open_sea(3, 2, f) and is_open_sea(4, 2, f) and is_open_sea(5, 2, f))==False
+    assert (is_open_sea(3, 2, f) or is_open_sea(4, 2, f) or is_open_sea(5, 2, f))==False
 
 def test_is_open_sea4():
     f = [(0, 0, True, 4, {}),
@@ -98,7 +98,7 @@ def test_ok_to_place_ship_at1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {})]
-    assert ok_to_place_ship_at(6, 6, True, 1, f)==False
+    assert ok_to_place_ship_at(6, 6, True, 1, f)==True
 
 def test_ok_to_place_ship_at2():
     #overlap
@@ -111,7 +111,7 @@ def test_ok_to_place_ship_at2():
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {}),
          (6, 6, True, 1, {})]
-    assert ok_to_place_ship_at(1, 6, False, 2, f) == True
+    assert ok_to_place_ship_at(1, 6, False, 2, f) == False
 
 def test_place_ship_at1():
     #add at least one test for place_ship_at by the deadline of session 7 assignment
@@ -134,7 +134,9 @@ def test_place_ship_at1():
            (6, 2, True, 1, {}),
            (6, 4, True, 1, {}),
            (6, 6, True, 1, {})]
-    assert place_ship_at(6, 0, True, 1, f)==f_1
+
+    for ship in f_1:
+        assert ship in place_ship_at(6, 6, True, 1, f)
     #provide at least five tests in total for place_ship_at by the project submission deadline
 
 def test_check_if_hits1():
