@@ -114,7 +114,7 @@ def test_ok_to_place_ship_at2():
     assert ok_to_place_ship_at(1, 6, False, 2, f) == False
 
 def test_place_ship_at1():
-    #add at least one test for place_ship_at by the deadline of session 7 assignment
+    #placing submarine in open sea
     f = [(0, 0, True, 4, {}),
          (2, 0, True, 3, {}),
          (2, 4, True, 3, {}),
@@ -124,7 +124,7 @@ def test_place_ship_at1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {})]
-    f_1 = [(0, 0, True, 4, {}),
+    f1 = [(0, 0, True, 4, {}),
            (2, 0, True, 3, {}),
            (2, 4, True, 3, {}),
            (4, 0, True, 2, {}),
@@ -134,10 +134,34 @@ def test_place_ship_at1():
            (6, 2, True, 1, {}),
            (6, 4, True, 1, {}),
            (6, 6, True, 1, {})]
-
-    for ship in f_1:
-        assert ship in place_ship_at(6, 6, True, 1, f)
+    assert (6, 6, True, 1, {}) in place_ship_at(6, 6, True, 1, f)
     #provide at least five tests in total for place_ship_at by the project submission deadline
+
+def test_place_ship_at2():
+    #placing cruiser in open sea
+    f = [(0, 0, True, 4, {}),
+         (2, 0, True, 3, {}),
+         (4, 0, True, 2, {}),
+         (4, 3, True, 2, {}),
+         (4, 6, True, 2, {}),
+         (6, 0, True, 1, {}),
+         (6, 2, True, 1, {}),
+         (6, 4, True, 1, {}),
+         (6, 6, True, 1, {})]
+    f1 = [(0, 0, True, 4, {}),
+         (2, 0, True, 3, {}),
+         (2, 4, True, 3, {}),
+         (4, 0, True, 2, {}),
+         (4, 3, True, 2, {}),
+         (4, 6, True, 2, {}),
+         (6, 0, True, 1, {}),
+         (6, 2, True, 1, {}),
+         (6, 4, True, 1, {}),
+         (6, 6, True, 1, {})]
+    assert (2, 4, True, 3, {}) in place_ship_at(2, 4, True, 3, f)
+
+
+
 
 def test_check_if_hits1():
     #add at least one test for check_if_hits by the deadline of session 7 assignment
