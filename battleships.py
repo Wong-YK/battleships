@@ -22,7 +22,8 @@ def is_open_sea(row, column, fleet):
         else:
             for i in range(-1, ship[3]+1):
                 ship_squares|={((ship[0]+i), ship[1]), ((ship[0]+i), (ship[1]-1)), ((ship[0]+i), (ship[1]+1))}
-    return ((row, column) in ship_squares)==True
+    if (row, column) in ship_squares: return False
+    else: return True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     ship_coords = set()
