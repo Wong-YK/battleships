@@ -34,7 +34,6 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
         for i in range(length):
             ship_coords|={(row+i, column)}
     ok = True
-    print(ship_coords)
     for coord in ship_coords:
         if not is_open_sea(coord[0], coord[1], fleet): ok = False
     return ok
@@ -45,7 +44,19 @@ def place_ship_at(row, column, horizontal, length, fleet):
 
 def randomly_place_all_ships():
     #remove pass and add your implementation
-    pass
+    f = []
+    lengths = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
+    for length in lengths:
+        # find a legal placement
+        placement_legal = False
+        while not placement_legal:
+            row = random.randrange(0, 10)
+            col = random.randrange(0, 10)
+            h = random.choice([True, False])
+            placement_legal = ok_to_place_ship_at(row, col, h, length, f)
+        # add ship to fleet
+        f = place_ship_at(row, col, h, length, f)
+    return f
 
 def check_if_hits(row, column, fleet):
     #remove pass and add your implementation
