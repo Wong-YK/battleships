@@ -107,6 +107,19 @@ def test_ok_to_place_ship_at2():
          (6, 6, True, 1, {})]
     assert ok_to_place_ship_at(1, 6, False, 2, f) == False
 
+def test_ok_to_place_ship_at3():
+    f = [(0, 5, True, 1, {}),
+         (0, 8, True, 1, {}),
+         (2, 7, True, 2, {}),
+         (3, 2, True, 2, {}),
+         (4, 5, True, 2, {}),
+         (4, 9, False, 3, {}),
+         (5, 1, True, 1, {}),
+         (7, 2, True, 4, {}),
+         (9, 5, True, 1, {})]
+    assert ok_to_place_ship_at(9, 8, False, 3, f) == False
+
+
 def test_place_ship_at1():
     #placing submarine in open sea
     f = [(0, 0, True, 4, {}),
@@ -144,15 +157,15 @@ def test_place_ship_at2():
          (6, 4, True, 1, {}),
          (6, 6, True, 1, {})]
     f1 = [(0, 0, True, 4, {}),
-         (2, 0, True, 3, {}),
-         (2, 4, True, 3, {}),
-         (4, 0, True, 2, {}),
-         (4, 3, True, 2, {}),
-         (4, 6, True, 2, {}),
-         (6, 0, True, 1, {}),
-         (6, 2, True, 1, {}),
-         (6, 4, True, 1, {}),
-         (6, 6, True, 1, {})]
+          (2, 0, True, 3, {}),
+          (2, 4, True, 3, {}),
+          (4, 0, True, 2, {}),
+          (4, 3, True, 2, {}),
+          (4, 6, True, 2, {}),
+          (6, 0, True, 1, {}),
+          (6, 2, True, 1, {}),
+          (6, 4, True, 1, {}),
+          (6, 6, True, 1, {})]
     for ship in f1:
         assert ship in place_ship_at(2, 4, True, 3, f)
 
@@ -168,20 +181,21 @@ def test_place_ship_at3():
          (8, 0, True, 1, {}),
          (9, 7, True, 1, {})]
     f1 = [(0, 9, False, 4, {}),
-         (1, 5, True, 3, {}),
-         (3, 2, True, 3, {}),
-         (5, 2, True, 2, {}),
-         (5, 5, True, 2, {}),
-         (5, 9, True, 1, {}),
-         (6, 0, True, 1, {}),
-         (7, 5, False, 2, {}),
-         (8, 0, True, 1, {}),
-         (9, 7, True, 1, {})]
+          (1, 5, True, 3, {}),
+          (3, 2, True, 3, {}),
+          (5, 2, True, 2, {}),
+          (5, 5, True, 2, {}),
+          (5, 9, True, 1, {}),
+          (6, 0, True, 1, {}),
+          (7, 5, False, 2, {}),
+          (8, 0, True, 1, {}),
+          (9, 7, True, 1, {})]
     for ship in f1:
         assert ship in place_ship_at(0, 9, False, 4, f)
 
 def test_check_if_hits1():
     #add at least one test for check_if_hits by the deadline of session 7 assignment
+    #hit to top left square of battleship
     f = [(0, 0, True, 4, {}),
          (2, 0, True, 3, {}),
          (2, 4, True, 3, {}),
@@ -198,6 +212,7 @@ def test_check_if_hits1():
 
 def test_hit1():
     #add at least one test for hit by the deadline of session 7 assignment
+    #hit to submarine
     f = [(0, 0, True, 4, {}),
          (2, 0, True, 3, {}),
          (2, 4, True, 3, {}),
@@ -226,6 +241,7 @@ def test_hit1():
 
 def test_are_unsunk_ships_left1():
     #add at least one test for are_unsunk_ships_left by the deadline of session 7 assignment
+    #just one submarine sunk
     f = [(0, 0, True, 4, {}),
          (2, 0, True, 3, {}),
          (2, 4, True, 3, {}),
