@@ -35,6 +35,8 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
             ship_coords|={(row+i, column)}
     ok = True
     for coord in ship_coords:
+        if coord[0]<0 or coord[0]>9: ok = False
+        if coord[1]<0 or coord[1]>9: ok = False
         if not is_open_sea(coord[0], coord[1], fleet): ok = False
     return ok
 
