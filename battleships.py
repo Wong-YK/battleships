@@ -61,11 +61,22 @@ def randomly_place_all_ships():
     return f
 
 def check_if_hits(row, column, fleet):
+    ship_coords = set()
     for ship in fleet:
-        if row==ship[0] and column==ship[1]:
-            return True
+        if ship[2]:
+            for i in range(ship[3]):
+                ship_coords |= {(ship[0], ship[1] + i)}
         else:
-            return False
+            for i in range(ship[3]):
+                ship_coords |= {(ship[0] + i, ship[1])}
+    print(ship_coords)
+    print(len(ship_coords))
+    hit = False
+    for coord in ship_coords:
+        if row==coord[0] and column==coord[1]:
+            hit = True
+        else: continue
+    return hit
 
 def hit(row, column, fleet):
     #remove pass and add your implementation
