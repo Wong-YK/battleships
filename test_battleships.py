@@ -108,6 +108,7 @@ def test_ok_to_place_ship_at2():
     assert ok_to_place_ship_at(1, 6, False, 2, f) == False
 
 def test_ok_to_place_ship_at3():
+    #runs off bottom of grid
     f = [(0, 5, True, 1, {}),
          (0, 8, True, 1, {}),
          (2, 7, True, 2, {}),
@@ -118,6 +119,19 @@ def test_ok_to_place_ship_at3():
          (7, 2, True, 4, {}),
          (9, 5, True, 1, {})]
     assert ok_to_place_ship_at(9, 8, False, 3, f) == False
+
+def test_ok_to_place_ship_at4():
+    #runs off rhs of grid
+    f = [(0, 5, True, 1, {}),
+         (0, 8, True, 1, {}),
+         (2, 7, True, 2, {}),
+         (3, 2, True, 2, {}),
+         (4, 5, True, 2, {}),
+         (4, 9, False, 3, {}),
+         (5, 1, True, 1, {}),
+         (7, 2, True, 4, {}),
+         (9, 5, True, 1, {})]
+    assert ok_to_place_ship_at(9, 9, True, 3, f) == False
 
 
 def test_place_ship_at1():
