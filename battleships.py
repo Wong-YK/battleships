@@ -61,8 +61,11 @@ def randomly_place_all_ships():
     return f
 
 def check_if_hits(row, column, fleet):
-    #remove pass and add your implementation
-    pass
+    for ship in fleet:
+        if row==ship[0] and column==ship[1]:
+            return True
+        else:
+            return False
 
 def hit(row, column, fleet):
     #remove pass and add your implementation

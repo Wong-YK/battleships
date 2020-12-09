@@ -219,10 +219,27 @@ def test_check_if_hits1():
          (6, 0, True, 1, {}),
          (6, 2, True, 1, {}),
          (6, 4, True, 1, {}),
-         (6, 4, True, 1, {}),
          (6, 6, True, 1, {})]
     assert check_if_hits(0, 0, f)==True
     #provide at least five tests in total for check_if_hits by the project submission deadline
+
+def test_check_if_hits2():
+    #no hit
+    f = [(0, 0, False, 2, {}),
+         (1, 3, True, 4, {}),
+         (1, 9, True, 1, {}),
+         (3, 3, True, 3, {}),
+         (4, 7, False, 2, {}),
+         (5, 2, True, 2, {}),
+         (6, 0, False, 3, {}),
+         (7, 2, True, 1, {}),
+         (7, 5, True, 1, {}),
+         (9, 8, True, 1, {})]
+    assert check_if_hits(0, 5, f)==False
+
+
+
+
 
 def test_hit1():
     #add at least one test for hit by the deadline of session 7 assignment
