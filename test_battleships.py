@@ -237,7 +237,19 @@ def test_check_if_hits2():
          (9, 8, True, 1, {})]
     assert check_if_hits(0, 5, f)==False
 
-
+def test_check_if_hits3():
+    #hit (not top left square)
+    f = [(0, 0, False, 2, {}),
+         (1, 3, True, 4, {}),
+         (1, 9, True, 1, {}),
+         (3, 3, True, 3, {}),
+         (4, 7, False, 2, {}),
+         (5, 2, True, 2, {}),
+         (6, 0, False, 3, {}),
+         (7, 2, True, 1, {}),
+         (7, 5, True, 1, {}),
+         (9, 8, True, 1, {})]
+    assert check_if_hits(3, 5, f)==True
 
 
 
