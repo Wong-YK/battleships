@@ -69,8 +69,6 @@ def check_if_hits(row, column, fleet):
         else:
             for i in range(ship[3]):
                 ship_coords |= {(ship[0] + i, ship[1])}
-    print(ship_coords)
-    print(len(ship_coords))
     hit = False
     for coord in ship_coords:
         if row==coord[0] and column==coord[1]:
@@ -80,6 +78,18 @@ def check_if_hits(row, column, fleet):
 
 def hit(row, column, fleet):
     #remove pass and add your implementation
+    for ship in fleet:
+        ship_coords = set()
+        if ship[2]:
+            for i in range(ship[3]):
+                ship_coords |= {(ship[0], ship[1] + i)}
+        else:
+            for i in range(ship[3]):
+                ship_coords |= {(ship[0] + i, ship[1])}
+        if (row, column) in ship_coords:
+            i = fleet.index(ship)
+            fleet[i][4] |= (row, column)
+            return (fleet, ship)
     pass
 
 def are_unsunk_ships_left(fleet):
