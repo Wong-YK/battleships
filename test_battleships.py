@@ -256,30 +256,27 @@ def test_check_if_hits3():
 def test_hit1():
     #add at least one test for hit by the deadline of session 7 assignment
     #hit to submarine
-    f = [(0, 0, True, 4, {}),
-         (2, 0, True, 3, {}),
-         (2, 4, True, 3, {}),
-         (4, 0, True, 2, {}),
-         (4, 3, True, 2, {}),
-         (4, 6, True, 2, {}),
-         (6, 0, True, 1, {}),
-         (6, 2, True, 1, {}),
-         (6, 4, True, 1, {}),
-         (6, 4, True, 1, {}),
-         (6, 6, True, 1, {})]
-    s = (6, 6, True, 1, {})
-    f_1 = [(0, 0, True, 4, {}),
-           (2, 0, True, 3, {}),
-           (2, 4, True, 3, {}),
-           (4, 0, True, 2, {}),
-           (4, 3, True, 2, {}),
-           (4, 6, True, 2, {}),
-           (6, 0, True, 1, {}),
-           (6, 2, True, 1, {}),
-           (6, 4, True, 1, {}),
-           (6, 4, True, 1, {}),
+    f = [(0, 0, True, 4, set()),
+         (2, 0, True, 3, set()),
+         (2, 4, True, 3, set()),
+         (4, 0, True, 2, set()),
+         (4, 3, True, 2, set()),
+         (4, 6, True, 2, set()),
+         (6, 0, True, 1, set()),
+         (6, 2, True, 1, set()),
+         (6, 4, True, 1, set()),
+         (6, 6, True, 1, set())]
+    f_1 = [(0, 0, True, 4, set()),
+           (2, 0, True, 3, set()),
+           (2, 4, True, 3, set()),
+           (4, 0, True, 2, set()),
+           (4, 3, True, 2, set()),
+           (4, 6, True, 2, set()),
+           (6, 0, True, 1, set()),
+           (6, 2, True, 1, set()),
+           (6, 4, True, 1, set()),
            (6, 6, True, 1, {(6,6)})]
-    assert hit(6, 6, f)==(f_1, s)
+    assert hit(6, 6, f)==(f_1, f_1[9])
     #provide at least five tests in total for hit by the project submission deadline
 
 def test_are_unsunk_ships_left1():
