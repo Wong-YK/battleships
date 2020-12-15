@@ -269,17 +269,17 @@ def test_hit1():
          (6, 6, True, 1, {})]
     s = (6, 6, True, 1, {})
     f_1 = [(0, 0, True, 4, {}),
-          (2, 0, True, 3, {}),
-          (2, 4, True, 3, {}),
-          (4, 0, True, 2, {}),
-          (4, 3, True, 2, {}),
-          (4, 6, True, 2, {}),
-          (6, 0, True, 1, {}),
-          (6, 2, True, 1, {}),
-          (6, 4, True, 1, {}),
-          (6, 4, True, 1, {}),
-          (6, 6, True, 1, {(6,6)})]
-    assert type(hit(0, 0, f))==(f_1, s)
+           (2, 0, True, 3, {}),
+           (2, 4, True, 3, {}),
+           (4, 0, True, 2, {}),
+           (4, 3, True, 2, {}),
+           (4, 6, True, 2, {}),
+           (6, 0, True, 1, {}),
+           (6, 2, True, 1, {}),
+           (6, 4, True, 1, {}),
+           (6, 4, True, 1, {}),
+           (6, 6, True, 1, {(6,6)})]
+    assert hit(6, 6, f)==(f_1, s)
     #provide at least five tests in total for hit by the project submission deadline
 
 def test_are_unsunk_ships_left1():
