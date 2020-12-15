@@ -296,13 +296,38 @@ def test_hit2():
            (2, 0, True, 3, set()),
            (2, 4, True, 3, set()),
            (4, 0, True, 2, set()),
-           (4, 3, True, 2, {(4,4)}),
+           (4, 3, True, 2, {(4, 4)}),
            (4, 6, True, 2, set()),
            (6, 0, True, 1, set()),
            (6, 2, True, 1, set()),
            (6, 4, True, 1, set()),
            (6, 6, True, 1, set())]
     assert hit(4, 4, f)==(f_1, f_1[4])
+
+def test_hit3():
+    #add at least one test for hit by the deadline of session 7 assignment
+    #hit to submarine on top left square
+    f = [(1, 2, False, 2, set()),
+         (2, 6, True, 3, set()),
+         (4, 0, True, 1, set()),
+         (4, 3, True, 1, set()),
+         (4, 7, True, 3, set()),
+         (6, 2, True, 2, set()),
+         (6, 6, True, 1, set()),
+         (6, 9, False, 4, set()),
+         (8, 4, False, 2, set()),
+         (9, 1, True, 1, set())]
+    f_1 = [(1, 2, False, 2, set()),
+           (2, 6, True, 3, set()),
+           (4, 0, True, 1, set()),
+           (4, 3, True, 1, set()),
+           (4, 7, True, 3, set()),
+           (6, 2, True, 2, set()),
+           (6, 6, True, 1, set()),
+           (6, 9, False, 4, {(7, 9)}),
+           (8, 4, False, 2, set()),
+           (9, 1, True, 1, set())]
+    assert hit(7, 9, f)==(f_1, f_1[7])
 
 def test_are_unsunk_ships_left1():
     #add at least one test for are_unsunk_ships_left by the deadline of session 7 assignment
