@@ -88,13 +88,17 @@ def hit(row, column, fleet):
                 ship_coords |= {(ship[0] + i, ship[1])}
         if (row, column) in ship_coords:
             i = fleet.index(ship)
-            fleet[i][4] |= (row, column)
+            fleet[i][4].add((row, column))
             return (fleet, ship)
-    pass
 
 def are_unsunk_ships_left(fleet):
     #remove pass and add your implementation
-    pass
+    for ship in fleet:
+        if ship[3]!=len(ship[4]):
+            return True
+        else: continue
+    return False
+
 
 def main():
     #the implementation provided below is indicative only
