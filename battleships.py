@@ -1,4 +1,5 @@
 #see the readme.md file for description and data
+import random
 
 def is_sunk(ship):
     return ship[3]==len(ship[4])
@@ -41,7 +42,7 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     return ok
 
 def place_ship_at(row, column, horizontal, length, fleet):
-    fleet.append((row, column, horizontal, length, {}))
+    fleet.append((row, column, horizontal, length, set()))
     return fleet
 
 def randomly_place_all_ships():
@@ -121,7 +122,7 @@ def main():
         else:
             print("You missed!")
 
-        if not are_unsunk_shis_left(current_fleet): game_over = True
+        if not are_unsunk_ships_left(current_fleet): game_over = True
 
     print("Game over! You required", shots, "shots.")
 
