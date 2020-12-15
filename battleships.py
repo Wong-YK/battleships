@@ -95,7 +95,7 @@ def hit(row, column, fleet):
 def are_unsunk_ships_left(fleet):
     #remove pass and add your implementation
     for ship in fleet:
-        if ship[3]!=len(ship[4]):
+        if not is_sunk(ship):
             return True
         else: continue
     return False
