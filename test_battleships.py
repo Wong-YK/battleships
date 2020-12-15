@@ -254,7 +254,6 @@ def test_check_if_hits3():
 
 
 def test_hit1():
-    #add at least one test for hit by the deadline of session 7 assignment
     #hit to submarine on top left square
     f = [(0, 0, True, 4, set()),
          (2, 0, True, 3, set()),
@@ -280,8 +279,7 @@ def test_hit1():
     #provide at least five tests in total for hit by the project submission deadline
 
 def test_hit2():
-    #add at least one test for hit by the deadline of session 7 assignment
-    #hit to submarine on top left square
+    #hit to horizontal destroyer on non-top left square
     f = [(0, 0, True, 4, set()),
          (2, 0, True, 3, set()),
          (2, 4, True, 3, set()),
@@ -306,7 +304,7 @@ def test_hit2():
 
 def test_hit3():
     #add at least one test for hit by the deadline of session 7 assignment
-    #hit to submarine on top left square
+    #hit to horizontal battleship on non-top left square
     f = [(1, 2, False, 2, set()),
          (2, 6, True, 3, set()),
          (4, 0, True, 1, set()),
@@ -330,19 +328,32 @@ def test_hit3():
     assert hit(7, 9, f)==(f_1, f_1[7])
 
 def test_are_unsunk_ships_left1():
-    #add at least one test for are_unsunk_ships_left by the deadline of session 7 assignment
-    #just one submarine sunk
-    f = [(0, 0, True, 4, {}),
-         (2, 0, True, 3, {}),
-         (2, 4, True, 3, {}),
-         (4, 0, True, 2, {}),
-         (4, 3, True, 2, {}),
-         (4, 6, True, 2, {}),
-         (6, 0, True, 1, {}),
-         (6, 2, True, 1, {}),
-         (6, 4, True, 1, {}),
-         (6, 4, True, 1, {}),
+    # provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
+    #Just one submarine sunk
+    f = [(0, 0, True, 4, set()),
+         (2, 0, True, 3, set()),
+         (2, 4, True, 3, set()),
+         (4, 0, True, 2, set()),
+         (4, 3, True, 2, set()),
+         (4, 6, True, 2, set()),
+         (6, 0, True, 1, set()),
+         (6, 2, True, 1, set()),
+         (6, 4, True, 1, set()),
+         (6, 4, True, 1, set()),
          (6, 6, True, 1, {(6, 6)})]
     assert are_unsunk_ships_left(f)==True
-    #provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
-    
+
+def test_are_unsunk_ships_left2():
+    # provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
+    #Everything sunk
+    f = f = [(1, 2, False, 2, {(1, 2), (2, 2)}),
+             (2, 6, True, 3, {(2, 6), (2, 7), (2, 8)}),
+             (4, 0, True, 1, {(4, 0)}),
+             (4, 3, True, 1, {(4, 3)}),
+             (4, 7, True, 3, {(4, 7), (4, 8), (4, 9)}),
+             (6, 2, True, 2, {(6, 2), (6, 3)}),
+             (6, 6, True, 1, {(6, 6)}),
+             (6, 9, False, 4, {(6, 9), (7, 9), (8, 9), (9, 9)}),
+             (8, 4, False, 2, {(8, 4), (9, 4)}),
+             (9, 1, True, 1, {(9, 1)})]
+    assert are_unsunk_ships_left(f)==False
