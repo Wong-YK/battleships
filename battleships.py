@@ -104,6 +104,13 @@ def create_board():
     board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     return board
 
+def update_board_hit(row, col, board):
+    board[row][col] = "*"
+
+def update_board_miss(row, col, board):
+    board[row][col] = "-"
+
+
 def print_board(board):
     for row in board:
         for i in range(len(row)):
