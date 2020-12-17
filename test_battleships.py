@@ -357,3 +357,10 @@ def test_are_unsunk_ships_left2():
              (8, 4, False, 2, {(8, 4), (9, 4)}),
              (9, 1, True, 1, {(9, 1)})]
     assert are_unsunk_ships_left(f)==False
+
+def test_update_board_hit1():
+    #hit to (0, 0)
+    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    updated = update_board_hit(0, 0, board)
+    assert updated[0][0]=="*"
+
