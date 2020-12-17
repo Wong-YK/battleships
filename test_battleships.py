@@ -364,3 +364,9 @@ def test_update_board_hit1():
     updated = update_board_hit(0, 0, board)
     assert updated[0][0]=="*"
 
+def test_update_board_miss1():
+    #miss to (1, 3)
+    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    updated = update_board_miss(1, 3, board)
+    assert updated[1][3]=="-"
+
