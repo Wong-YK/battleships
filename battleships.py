@@ -106,6 +106,7 @@ def create_board():
 
 def update_board_hit(row, col, board):
     board[row][col] = "*"
+    return board
 
 def update_board_miss(row, col, board):
     board[row][col] = "-"
