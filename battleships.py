@@ -100,19 +100,37 @@ def are_unsunk_ships_left(fleet):
         else: continue
     return False
 
+def create_board():
+    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    return board
+
+def print_board(board):
+    for row in board:
+        for i in range(len(row)):
+            if i<9:
+                print(row[i], end="  ")
+            else:
+                print(row[i])
 
 def main():
     #the implementation provided below is indicative only
     #you should improve it or fully rewrite to provide better functionality (see readme file)
     current_fleet = randomly_place_all_ships()
 
+    current_board = create_board()
+
     game_over = False
     shots = 0
 
     while not game_over:
-        loc_str = input("Enter row and colum to shoot (separted by space): ").split()    
-        current_row = int(loc_str[0])
-        current_column = int(loc_str[1])
+        loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
+        if loc_str==["q"]: break
+        try:
+            current_row = int(loc_str[0])
+            current_column = int(loc_str[1])
+        except:
+            print("Invalid input, please try again")
+            continue
         shots += 1
         if check_if_hits(current_row, current_column, current_fleet):
             print("You have a hit!")
@@ -122,9 +140,12 @@ def main():
         else:
             print("You missed!")
 
+        print_board(current_board)
+
         if not are_unsunk_ships_left(current_fleet): game_over = True
 
-    print("Game over! You required", shots, "shots.")
+    if game_over: print("Game over! You required", shots, "shots.")
+    else: print("Sorry to see you go, you're welcome to come back and play anytime!")
 
 
 if __name__ == '__main__': #keep this in
