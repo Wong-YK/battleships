@@ -128,15 +128,13 @@ def update_board_sink(ship_sunk, board):
 def print_board(board):
     print("\t"+"0  1  2  3  4  5  6  7  8  9")
     print("\t"+"-"*28)
-    row_num = 0
-    for row in board:
-        print(row_num, "|", end=" ")
-        row_num+=1
-        for i in range(len(row)):
-            if i<9:
-                print(row[i], end="  ")
+    for i in range(len(board)):
+        print(i, "|", end=" ")
+        for j in range(len(board[i])):
+            if j<9:
+                print(board[i][j], end="  ")
             else:
-                print(row[i])
+                print(board[i][j])
 
 def main():
     #the implementation provided below is indicative only
