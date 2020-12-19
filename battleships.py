@@ -110,7 +110,22 @@ def update_board_hit(row, col, board):
 
 def update_board_miss(row, col, board):
     board[row][col] = "-"
+    return board
 
+def update_board_sink(ship_sunk, board):
+    #Determine markers based on ship type
+    if ship_type(ship_sunk)=="battleship":
+        ship_sunk_type = "B"
+    elif ship_type(ship_sunk)=="cruiser":
+        ship_sunk_type = "C"
+    elif ship_type(ship_sunk)=="destroyer":
+        ship_sunk_type = "D"
+    else:
+        ship_sunk_type = "S"
+
+    #Apply markers to board
+    for (row, col) in ship_sunk[4]:
+        board[row][col] = ship_sunk_type
 
 def print_board(board):
     for row in board:
@@ -141,12 +156,14 @@ def main():
             continue
         shots += 1
         if check_if_hits(current_row, current_column, current_fleet):
+            update_board_hit(current_row, current_column, current_board)
             print("You have a hit!")
             (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
             if is_sunk(ship_hit):
                 print("You sank a " + ship_type(ship_hit) + "!")
         else:
             print("You missed!")
+            update_board_miss(current_row, current_column, current_board)
 
         print_board(current_board)
 
