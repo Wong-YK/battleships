@@ -106,11 +106,9 @@ def create_board():
 
 def update_board_hit(row, col, board):
     board[row][col] = "*"
-    return board
 
 def update_board_miss(row, col, board):
     board[row][col] = "-"
-    return board
 
 def update_board_sink(ship_sunk, board):
     #Determine markers based on ship type
@@ -128,7 +126,12 @@ def update_board_sink(ship_sunk, board):
         board[row][col] = ship_sunk_type
 
 def print_board(board):
+    print("\t"+"0  1  2  3  4  5  6  7  8  9")
+    print("\t"+"-"*28)
+    row_num = 0
     for row in board:
+        print(row_num, "|", end=" ")
+        row_num+=1
         for i in range(len(row)):
             if i<9:
                 print(row[i], end="  ")
@@ -161,6 +164,7 @@ def main():
             (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
             if is_sunk(ship_hit):
                 print("You sank a " + ship_type(ship_hit) + "!")
+                update_board_sink(ship_hit, current_board)
         else:
             print("You missed!")
             update_board_miss(current_row, current_column, current_board)
@@ -170,7 +174,7 @@ def main():
         if not are_unsunk_ships_left(current_fleet): game_over = True
 
     if game_over: print("Game over! You required", shots, "shots.")
-    else: print("Sorry to see you go, you're welcome to come back and play anytime!")
+    else: print("Sorry to see you go, come back and play anytime!")
 
 
 if __name__ == '__main__': #keep this in
