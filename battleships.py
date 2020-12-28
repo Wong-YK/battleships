@@ -2,9 +2,16 @@
 import random
 
 def is_sunk(ship):
+    """
+    returns Boolean value, which is True if ship is sunk and False otherwise
+    """
     return ship[3]==len(ship[4])
 
 def ship_type(ship):
+    """
+    returns one of the strings "battleship", "cruiser", "destroyer", or "submarine"
+    identifying the type of ship
+    """
     if ship[3]==4:
         return "battleship"
     elif ship[3]==3:
@@ -15,6 +22,11 @@ def ship_type(ship):
         return "submarine"
 
 def is_open_sea(row, column, fleet):
+    """
+    checks if the square given by row and column neither contains nor is adjacent
+    (horizontally, vertically, or diagonally) to some ship in fleet. Returns Boolean
+    True if so and False otherwise
+    """
     ship_squares=set()
     for ship in fleet:
         if ship[2]:
@@ -27,6 +39,13 @@ def is_open_sea(row, column, fleet):
     else: return True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
+    """
+    checks if addition of a ship, specified by row, column, horizontal, and
+    length as in ship representation above, to the fleet results in a legal
+    arrangement (see the figure above). If so, the function returns Boolean
+    True and it returns False otherwise. This function makes use of the function
+    is_open_sea
+    """
     ship_coords = set()
     if horizontal:
         for i in range(length):
@@ -42,11 +61,19 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     return ok
 
 def place_ship_at(row, column, horizontal, length, fleet):
+    """
+    returns a new fleet that is the result of adding a ship, specified by row, column,
+    horizontal, and length as in ship representation above, to fleet. It may be assumed
+    that the resulting arrangement of the new fleet is legal
+    """
     fleet.append((row, column, horizontal, length, set()))
     return fleet
 
 def randomly_place_all_ships():
-    #remove pass and add your implementation
+    """
+    returns a fleet that is a result of a random legal arrangement of the 10 ships in the
+    ocean. This function makes use of the functions ok_to_place_ship_at and place_ship_at
+    """
     f = []
     lengths = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
     for length in lengths:
@@ -62,6 +89,10 @@ def randomly_place_all_ships():
     return f
 
 def check_if_hits(row, column, fleet):
+    """
+    returns Boolean value, which is True if the shot of the human player at the square
+    represented by row and column hits any of the ships of fleet, and False otherwise
+    """
     ship_coords = set()
     for ship in fleet:
         if ship[2]:
@@ -78,7 +109,12 @@ def check_if_hits(row, column, fleet):
     return hit
 
 def hit(row, column, fleet):
-    #remove pass and add your implementation
+    """
+    returns a tuple (fleet1, ship) where ship is the ship from the fleet fleet that
+    receives a hit by the shot at the square represented by row and column, and fleet1
+    is the fleet resulting from this hit. It may be assumed that shooting at the square
+    row, column results in hitting of some ship in fleet
+    """
     for ship in fleet:
         ship_coords = set()
         if ship[2]:
@@ -93,7 +129,10 @@ def hit(row, column, fleet):
             return (fleet, ship)
 
 def are_unsunk_ships_left(fleet):
-    #remove pass and add your implementation
+    """
+    returns Boolean value, which is True if there are ships in the fleet that are still
+    not sunk, and False otherwise
+    """
     for ship in fleet:
         if not is_sunk(ship):
             return True
@@ -101,16 +140,34 @@ def are_unsunk_ships_left(fleet):
     return False
 
 def create_board():
+    """
+    returns list of lists that serves as a  representation of the game board
+    in its initial state (i.e. no shots fired); this representation will be
+    used for the graphics element of the game
+    """
     board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     return board
 
 def update_board_hit(row, col, board):
+    """"
+    returns list of lists to represent updated game board following a hit which
+    is denoted by a "*"
+    """
     board[row][col] = "*"
 
 def update_board_miss(row, col, board):
+    """
+    returns list of lists to represent updated game board following a miss which
+    is denoted by a "-"
+    """
     board[row][col] = "-"
 
 def update_board_sink(ship_sunk, board):
+    """
+    returns list of lists to represent updated game board following a sink which
+    is denoted by a "B" if a battleship is sunk, a "C if a cruiser is sunk, a
+    "D" if a destroyer is sunk and a "S" if a submarine is sunk
+       """
     #Determine markers based on ship type
     if ship_type(ship_sunk)=="battleship":
         ship_sunk_type = "B"
@@ -126,6 +183,9 @@ def update_board_sink(ship_sunk, board):
         board[row][col] = ship_sunk_type
 
 def print_board(board):
+    """
+    prints representation of game board along with column and row markers
+    """
     print("\t"+"0  1  2  3  4  5  6  7  8  9")
     print("\t"+"-"*28)
     for i in range(len(board)):
@@ -137,8 +197,13 @@ def print_board(board):
                 print(board[i][j])
 
 def main():
-    #the implementation provided below is indicative only
-    #you should improve it or fully rewrite to provide better functionality (see readme file)
+    """
+    returns nothing. It prompts the user to call out rows and columns of shots and
+    outputs the responses of the computer iteratively until the game stops. Further
+    requirements: (a) there must be an option for the human player to quit the game
+    at any time, (b) the program must never crash (i.e., no termination with Python
+    error messages), whatever the human player does.
+    """
     current_fleet = randomly_place_all_ships()
 
     current_board = create_board()
