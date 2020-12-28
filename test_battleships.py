@@ -190,125 +190,211 @@ def test_ok_to_place_ship_at4():
          (9, 5, True, 1, {})]
     assert ok_to_place_ship_at(9, 9, True, 3, f) == False
 
+def test_ok_to_place_ship_at5():
+    #place destroyer that occupies an adjecent square to a battleship
+    f = [(0, 1, True, 2, set()),
+         (0, 7, False, 4, set()),
+         (3, 2, True, 3, set()),
+         (4, 0, True, 1, set()),
+         (5, 6, True, 1, set()),
+         (6, 0, False, 2, set()),
+         (6, 2, True, 1, set()),
+         (7, 5, True, 3, set()),
+         (8, 9, True, 1, set())]
+    assert ok_to_place_ship_at(3, 8, False, 2, f) == False
+
 
 def test_place_ship_at1():
     #placing submarine in open sea
-    f = [(0, 0, True, 4, {}),
-         (2, 0, True, 3, {}),
-         (2, 4, True, 3, {}),
-         (4, 0, True, 2, {}),
-         (4, 3, True, 2, {}),
-         (4, 6, True, 2, {}),
-         (6, 0, True, 1, {}),
-         (6, 2, True, 1, {}),
-         (6, 4, True, 1, {})]
-    f1 = [(0, 0, True, 4, {}),
-           (2, 0, True, 3, {}),
-           (2, 4, True, 3, {}),
-           (4, 0, True, 2, {}),
-           (4, 3, True, 2, {}),
-           (4, 6, True, 2, {}),
-           (6, 0, True, 1, {}),
-           (6, 2, True, 1, {}),
-           (6, 4, True, 1, {}),
-           (6, 6, True, 1, {})]
+    f = [(0, 0, True, 4, set()),
+         (2, 0, True, 3, set()),
+         (2, 4, True, 3, set()),
+         (4, 0, True, 2, set()),
+         (4, 3, True, 2, set()),
+         (4, 6, True, 2, set()),
+         (6, 0, True, 1, set()),
+         (6, 2, True, 1, set()),
+         (6, 4, True, 1, set())]
+    f1 = [(0, 0, True, 4, set()),
+           (2, 0, True, 3, set()),
+           (2, 4, True, 3, set()),
+           (4, 0, True, 2, set()),
+           (4, 3, True, 2, set()),
+           (4, 6, True, 2, set()),
+           (6, 0, True, 1, set()),
+           (6, 2, True, 1, set()),
+           (6, 4, True, 1, set()),
+           (6, 6, True, 1, set())]
     for ship in f1:
         assert ship in place_ship_at(6, 6, True, 1, f)
     #provide at least five tests in total for place_ship_at by the project submission deadline
 
 def test_place_ship_at2():
-    #placing cruiser in open sea
-    f = [(0, 0, True, 4, {}),
-         (2, 0, True, 3, {}),
-         (4, 0, True, 2, {}),
-         (4, 3, True, 2, {}),
-         (4, 6, True, 2, {}),
-         (6, 0, True, 1, {}),
-         (6, 2, True, 1, {}),
-         (6, 4, True, 1, {}),
-         (6, 6, True, 1, {})]
-    f1 = [(0, 0, True, 4, {}),
-          (2, 0, True, 3, {}),
-          (2, 4, True, 3, {}),
-          (4, 0, True, 2, {}),
-          (4, 3, True, 2, {}),
-          (4, 6, True, 2, {}),
-          (6, 0, True, 1, {}),
-          (6, 2, True, 1, {}),
-          (6, 4, True, 1, {}),
-          (6, 6, True, 1, {})]
+    #placing horizontal cruiser in open sea
+    f = [(0, 0, True, 4, set()),
+         (2, 0, True, 3, set()),
+         (4, 0, True, 2, set()),
+         (4, 3, True, 2, set()),
+         (4, 6, True, 2, set()),
+         (6, 0, True, 1, set()),
+         (6, 2, True, 1, set()),
+         (6, 4, True, 1, set()),
+         (6, 6, True, 1, set())]
+    f1 = [(0, 0, True, 4, set()),
+          (2, 0, True, 3, set()),
+          (2, 4, True, 3, set()),
+          (4, 0, True, 2, set()),
+          (4, 3, True, 2, set()),
+          (4, 6, True, 2, set()),
+          (6, 0, True, 1, set()),
+          (6, 2, True, 1, set()),
+          (6, 4, True, 1, set()),
+          (6, 6, True, 1, set())]
     for ship in f1:
         assert ship in place_ship_at(2, 4, True, 3, f)
 
 def test_place_ship_at3():
-    #placing battleship in open sea
-    f = [(1, 5, True, 3, {}),
-         (3, 2, True, 3, {}),
-         (5, 2, True, 2, {}),
-         (5, 5, True, 2, {}),
-         (5, 9, True, 1, {}),
-         (6, 0, True, 1, {}),
-         (7, 5, False, 2, {}),
-         (8, 0, True, 1, {}),
-         (9, 7, True, 1, {})]
-    f1 = [(0, 9, False, 4, {}),
-          (1, 5, True, 3, {}),
-          (3, 2, True, 3, {}),
-          (5, 2, True, 2, {}),
-          (5, 5, True, 2, {}),
-          (5, 9, True, 1, {}),
-          (6, 0, True, 1, {}),
-          (7, 5, False, 2, {}),
-          (8, 0, True, 1, {}),
-          (9, 7, True, 1, {})]
+    #placing vertical battleship in open sea
+    f = [(1, 5, True, 3, set()),
+         (3, 2, True, 3, set()),
+         (5, 2, True, 2, set()),
+         (5, 5, True, 2, set()),
+         (5, 9, True, 1, set()),
+         (6, 0, True, 1, set()),
+         (7, 5, False, 2, set()),
+         (8, 0, True, 1, set()),
+         (9, 7, True, 1, set())]
+    f1 = [(0, 9, False, 4, set()),
+          (1, 5, True, 3, set()),
+          (3, 2, True, 3, set()),
+          (5, 2, True, 2, set()),
+          (5, 5, True, 2, set()),
+          (5, 9, True, 1, set()),
+          (6, 0, True, 1, set()),
+          (7, 5, False, 2, set()),
+          (8, 0, True, 1, set()),
+          (9, 7, True, 1, set())]
     for ship in f1:
         assert ship in place_ship_at(0, 9, False, 4, f)
 
+def test_place_ship_at4():
+    #place vertical destroyer in open sea
+    f = [(0, 1, True, 2, set()),
+         (0, 7, False, 4, set()),
+         (3, 2, True, 3, set()),
+         (4, 0, True, 1, set()),
+         (5, 6, True, 1, set()),
+         (6, 0, False, 2, set()),
+         (6, 2, True, 1, set()),
+         (7, 5, True, 3, set()),
+         (8, 9, True, 1, set())]
+    f1 = [(0, 1, True, 2, set()),
+          (0, 7, False, 4, set()),
+          (3, 2, True, 3, set()),
+          (4, 0, True, 1, set()),
+          (5, 6, True, 1, set()),
+          (6, 0, False, 2, set()),
+          (6, 2, True, 1, set()),
+          (7, 5, True, 3, set()),
+          (8, 9, True, 1, set()),
+          (3, 9, False, 2, set())]
+    for ship in f1:
+        assert ship in place_ship_at(3, 9, False, 2, f)
+
+def test_place_ship_at5():
+    #place vertical cruiser in open sea
+    f = [(0, 1, True, 2, set()),
+         (0, 7, False, 4, set()),
+         (3, 2, True, 3, set()),
+         (4, 0, True, 1, set()),
+         (5, 6, True, 1, set()),
+         (6, 0, False, 2, set()),
+         (6, 2, True, 1, set()),
+         (8, 9, True, 1, set()),
+         (3, 9, False, 2, set())]
+    f1 = [(0, 1, True, 2, set()),
+          (0, 7, False, 4, set()),
+          (3, 2, True, 3, set()),
+          (4, 0, True, 1, set()),
+          (5, 6, True, 1, set()),
+          (6, 0, False, 2, set()),
+          (6, 2, True, 1, set()),
+          (7, 5, False, 3, set()),
+          (8, 9, True, 1, set()),
+          (3, 9, False, 2, set())]
+    for ship in f1:
+        assert ship in place_ship_at(7, 5, False, 3, f)
+
 def test_check_if_hits1():
-    #add at least one test for check_if_hits by the deadline of session 7 assignment
     #hit to top left square of battleship
-    f = [(0, 0, True, 4, {}),
-         (2, 0, True, 3, {}),
-         (2, 4, True, 3, {}),
-         (4, 0, True, 2, {}),
-         (4, 3, True, 2, {}),
-         (4, 6, True, 2, {}),
-         (6, 0, True, 1, {}),
-         (6, 2, True, 1, {}),
-         (6, 4, True, 1, {}),
-         (6, 6, True, 1, {})]
+    f = [(0, 0, True, 4, set()),
+         (2, 0, True, 3, set()),
+         (2, 4, True, 3, set()),
+         (4, 0, True, 2, set()),
+         (4, 3, True, 2, set()),
+         (4, 6, True, 2, set()),
+         (6, 0, True, 1, set()),
+         (6, 2, True, 1, set()),
+         (6, 4, True, 1, set()),
+         (6, 6, True, 1, set())]
     assert check_if_hits(0, 0, f)==True
     #provide at least five tests in total for check_if_hits by the project submission deadline
 
 def test_check_if_hits2():
-    #no hit
-    f = [(0, 0, False, 2, {}),
-         (1, 3, True, 4, {}),
-         (1, 9, True, 1, {}),
-         (3, 3, True, 3, {}),
-         (4, 7, False, 2, {}),
-         (5, 2, True, 2, {}),
-         (6, 0, False, 3, {}),
-         (7, 2, True, 1, {}),
-         (7, 5, True, 1, {}),
-         (9, 8, True, 1, {})]
+    #no hit (adjacent)
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, set()),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
     assert check_if_hits(0, 5, f)==False
 
 def test_check_if_hits3():
     #hit (not top left square)
-    f = [(0, 0, False, 2, {}),
-         (1, 3, True, 4, {}),
-         (1, 9, True, 1, {}),
-         (3, 3, True, 3, {}),
-         (4, 7, False, 2, {}),
-         (5, 2, True, 2, {}),
-         (6, 0, False, 3, {}),
-         (7, 2, True, 1, {}),
-         (7, 5, True, 1, {}),
-         (9, 8, True, 1, {})]
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, set()),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
     assert check_if_hits(3, 5, f)==True
 
+def test_check_if_hits4():
+    #hit to vertical cruiser (not top left square)
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, set()),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
+    assert check_if_hits(8, 0, f)==True
 
+def test_check_if_hits5():
+    #hit to horizontal destroyer (not top left square)
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, set()),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
+    assert check_if_hits(5, 3, f)==True
 
 def test_hit1():
     #hit to submarine on top left square
