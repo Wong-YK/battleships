@@ -2,15 +2,57 @@ import pytest
 from battleships import *
 
 def test_is_sunk1():
+    #vertical cruiser is sunk
     s = (2, 3, False, 3, {(2,3), (3,3), (4,3)})
     assert is_sunk(s)==True
-    #add at least four more tests for is_sunk by the project submission deadline
+
+def test_is_sunk2():
+    #submarine is not sunk
+    s = (0, 7, True, 1, set())
+    assert is_sunk(s)==False
+
+def test_is_sunk3():
+    #horizontal battleship is sunk
+    s = (8, 5, True, 4, {(8, 5), (8, 6), (8, 7), (8, 8)})
+    assert is_sunk(s) == True
+
+def test_is_sunk4():
+    #horizontal cruiser hit but not sunk
+    s = (3, 4, True, 3, {(3, 4), (3, 6)})
+    assert is_sunk(s) == False
+
+def test_is_sunk5():
+    #vertical destroyer sunk
+    s = (8, 0, False, 2, {(8, 0), (9, 0)})
+    assert is_sunk(s) == True
+
 
 def test_ship_type1():
-    #add at least one test for ship_type by the deadline of session 7 assignment
-    s = (2, 3, False, 3, {(2,3), (3,3), (4,3)})
+    #cruiser
+    s = (2, 3, False, 3, set())
     assert ship_type(s)=="cruiser"
-    #provide at least five tests in total for ship_type by the project submission deadline
+
+def test_ship_type2():
+    #battleship
+    s = (4, 2, False, 4, set())
+    assert ship_type(s)=="battleship"
+
+def test_ship_type3():
+    #destroyer
+    s = (1, 8, False, 2, set())
+    assert ship_type(s)=="destroyer"
+
+def test_ship_type4():
+    #destroyer
+    s = (5, 8, True, 1, {(5, 8)})
+    assert ship_type(s)=="submarine"
+
+def test_ship_type5():
+    #battleship (horizontal)
+    s = (9, 0, True, 4, {(9, 1), (9, 2), (9, 3)})
+    assert ship_type(s)=="battleship"
+
+
 
 def test_is_open_sea1():
     f = [(0, 0, True, 4, {}),
