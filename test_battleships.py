@@ -547,6 +547,48 @@ def test_are_unsunk_ships_left2():
              (9, 1, True, 1, {(9, 1)})]
     assert are_unsunk_ships_left(f)==False
 
+def test_are_unsunk_ships_left3():
+    #no hits
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, set()),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
+    assert are_unsunk_ships_left(f)==True
+
+def test_are_unsunk_ships_left4():
+    #top left square of every ship hit
+    f = [(0, 0, False, 2, {(0, 0)}),
+         (1, 3, True, 4, {(1, 3)}),
+         (1, 9, True, 1, {(1, 9)}),
+         (3, 3, True, 3, {(3, 3)}),
+         (4, 7, False, 2, {(4, 7)}),
+         (5, 2, True, 2, {(5, 2)}),
+         (6, 0, False, 3, {(6, 0)}),
+         (7, 2, True, 1, {(7, 2)}),
+         (7, 5, True, 1, {(7, 5)}),
+         (9, 8, True, 1, {(9, 8)})]
+    assert are_unsunk_ships_left(f)==True
+
+def test_are_unsunk_ships_left5():
+    #single non-top left square not hit
+    f = [(0, 0, False, 2, {(0, 0), (1, 0)}),
+         (1, 3, True, 4, {(1, 3), (1, 4), (1, 5), (1, 6)}),
+         (1, 9, True, 1, {(1, 9)}),
+         (3, 3, True, 3, {(3, 3), (3, 4), (3, 5)}),
+         (4, 7, False, 2, {(4, 7), (5, 7)}),
+         (5, 2, True, 2, {(5, 2), (5, 3)}),
+         (6, 0, False, 3, {(6, 0), (7, 0)}),
+         (7, 2, True, 1, {(7, 2)}),
+         (7, 5, True, 1, {(7, 5)}),
+         (9, 8, True, 1, {(9, 8)})]
+    assert are_unsunk_ships_left(f)==True
+
 def test_update_board_hit1():
     #hit to (0, 0)
     board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
