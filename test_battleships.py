@@ -419,7 +419,6 @@ def test_hit1():
            (6, 4, True, 1, set()),
            (6, 6, True, 1, {(6,6)})]
     assert hit(6, 6, f)==(f_1, f_1[9])
-    #provide at least five tests in total for hit by the project submission deadline
 
 def test_hit2():
     #hit to horizontal destroyer on non-top left square
@@ -446,8 +445,7 @@ def test_hit2():
     assert hit(4, 4, f)==(f_1, f_1[4])
 
 def test_hit3():
-    #add at least one test for hit by the deadline of session 7 assignment
-    #hit to horizontal battleship on non-top left square
+    #hit to vertical battleship on non-top left square
     f = [(1, 2, False, 2, set()),
          (2, 6, True, 3, set()),
          (4, 0, True, 1, set()),
@@ -469,6 +467,54 @@ def test_hit3():
            (8, 4, False, 2, set()),
            (9, 1, True, 1, set())]
     assert hit(7, 9, f)==(f_1, f_1[7])
+
+def test_hit4():
+    #hit to horizontal destroyer on non-top left square
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, {(4, 7)}),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
+    f_1 = [(0, 0, False, 2, set()),
+           (1, 3, True, 4, set()),
+           (1, 9, True, 1, set()),
+           (3, 3, True, 3, set()),
+           (4, 7, False, 2, {(4, 7), (5, 7)}),
+           (5, 2, True, 2, set()),
+           (6, 0, False, 3, set()),
+           (7, 2, True, 1, set()),
+           (7, 5, True, 1, set()),
+           (9, 8, True, 1, set())]
+    assert hit(5, 7, f)==(f_1, f_1[4])
+
+def test_hit5():
+    #hit to horizontal destroyer on non-top left square
+    f = [(0, 0, False, 2, set()),
+         (1, 3, True, 4, set()),
+         (1, 9, True, 1, set()),
+         (3, 3, True, 3, set()),
+         (4, 7, False, 2, {(4, 7)}),
+         (5, 2, True, 2, set()),
+         (6, 0, False, 3, set()),
+         (7, 2, True, 1, set()),
+         (7, 5, True, 1, set()),
+         (9, 8, True, 1, set())]
+    f_1 = [(0, 0, False, 2, set()),
+           (1, 3, True, 4, set()),
+           (1, 9, True, 1, set()),
+           (3, 3, True, 3, {(3, 3)}),
+           (4, 7, False, 2, {(4, 7)}),
+           (5, 2, True, 2, set()),
+           (6, 0, False, 3, set()),
+           (7, 2, True, 1, set()),
+           (7, 5, True, 1, set()),
+           (9, 8, True, 1, set())]
+    assert hit(3, 3, f)==(f_1, f_1[3])
 
 def test_are_unsunk_ships_left1():
     # provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
