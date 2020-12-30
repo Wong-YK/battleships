@@ -241,17 +241,21 @@ def main():
         else:
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
-            shots += 1
-            if check_if_hits(current_row, current_column, current_fleet):
-                update_board_hit(current_row, current_column, current_board)
-                print("You have a hit!")
-                (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
-                if is_sunk(ship_hit):
-                    print("You sank a " + ship_type(ship_hit) + "!")
-                    update_board_sink(ship_hit, current_board)
+            if coords_already_targeted(current_row, current_column, current_board):
+                print("You have already targeted these coordinates, please try again")
+                continue
             else:
-                print("You missed!")
-                update_board_miss(current_row, current_column, current_board)
+                shots += 1
+                if check_if_hits(current_row, current_column, current_fleet):
+                    update_board_hit(current_row, current_column, current_board)
+                    print("You have a hit!")
+                    (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
+                    if is_sunk(ship_hit):
+                        print("You sank a " + ship_type(ship_hit) + "!")
+                        update_board_sink(ship_hit, current_board)
+                else:
+                    print("You missed!")
+                    update_board_miss(current_row, current_column, current_board)
 
         print_board(current_board)
 
