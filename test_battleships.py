@@ -639,4 +639,8 @@ def test_is_valid_input6():
     #integer less than 0
     assert is_valid_input(["-3", "1"])==False
 
+def test_square_already_targeted1():
+    #square not already targeted
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    assert square_already_targeted(0, 0 , b)==False
 

@@ -1,5 +1,6 @@
 #see the readme.md file for description and data
 import random
+import copy
 
 def is_sunk(ship):
     """
@@ -140,19 +141,19 @@ def are_unsunk_ships_left(fleet):
     return False
 
 def is_valid_input(input_list):
+    input_list_copy = copy.deepcopy(input_list)
     input_valid = True
     try:
-        for i in range(len(input_list)):
-            input_list[i]=int(input_list[i])
-            #print(input_list)
-        if len(input_list) > 2 or input_list[0] < 0 or input_list[0] > 9 or input_list[1] < 0 or input_list[1] > 9:
+        for i in range(len(input_list_copy)):
+            input_list_copy[i]=int(input_list_copy[i])
+        if len(input_list_copy) > 2 or input_list_copy[0] < 0 or input_list_copy[0] > 9 or input_list_copy[1] < 0 or input_list_copy[1] > 9:
                 input_valid = False
     except:
         input_valid = False
-        #print("could not be converted to int")
-        #print(input_list)
     return input_valid
 
+def square_already_targeted(row, column, board):
+    return False
 
 def create_board():
     """
