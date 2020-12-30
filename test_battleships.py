@@ -631,4 +631,12 @@ def test_is_valid_input4():
     #too many integers
     assert is_valid_input("1 2 3")==False
 
+def test_is_valid_input5():
+    #integer greater than 9
+    assert is_valid_input("1 11")==False
+
+def test_is_valid_input6():
+    #integer less than 0
+    assert is_valid_input("-3 1")==False
+
 
