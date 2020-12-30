@@ -139,15 +139,18 @@ def are_unsunk_ships_left(fleet):
         else: continue
     return False
 
-def is_valid_input(string):
-    input_list = string.split()
+def is_valid_input(input_list):
     input_valid = True
     try:
         for i in range(len(input_list)):
             input_list[i]=int(input_list[i])
-    except: input_valid = False
-    if len(input_list)>2 or (input_list[i]<0 or input_list[i]>9 for i in range(len(input_list))):
+            #print(input_list)
+        if len(input_list) > 2 or input_list[0] < 0 or input_list[0] > 9 or input_list[1] < 0 or input_list[1] > 9:
+                input_valid = False
+    except:
         input_valid = False
+        #print("could not be converted to int")
+        #print(input_list)
     return input_valid
 
 
@@ -226,23 +229,23 @@ def main():
     while not game_over:
         loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
         if loc_str==["q"]: break
-        try:
-            current_row = int(loc_str[0])
-            current_column = int(loc_str[1])
-        except:
+        elif is_valid_input(loc_str)==False:
             print("Invalid input, please try again")
             continue
-        shots += 1
-        if check_if_hits(current_row, current_column, current_fleet):
-            update_board_hit(current_row, current_column, current_board)
-            print("You have a hit!")
-            (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
-            if is_sunk(ship_hit):
-                print("You sank a " + ship_type(ship_hit) + "!")
-                update_board_sink(ship_hit, current_board)
         else:
-            print("You missed!")
-            update_board_miss(current_row, current_column, current_board)
+            current_row = int(loc_str[0])
+            current_column = int(loc_str[1])
+            shots += 1
+            if check_if_hits(current_row, current_column, current_fleet):
+                update_board_hit(current_row, current_column, current_board)
+                print("You have a hit!")
+                (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
+                if is_sunk(ship_hit):
+                    print("You sank a " + ship_type(ship_hit) + "!")
+                    update_board_sink(ship_hit, current_board)
+            else:
+                print("You missed!")
+                update_board_miss(current_row, current_column, current_board)
 
         print_board(current_board)
 
