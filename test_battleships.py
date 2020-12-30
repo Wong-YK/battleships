@@ -615,6 +615,10 @@ def test_update_board_sink2():
     update_board_sink(ship_sunk, board)
     assert board[5][4]=="S"
 
+def test_is_valid_input1():
+    #input of the form "x y" where 0<=x<=9 and 0<=y<=9
+    assert is_valid_input("0 9")==True
+
 
 
 
