@@ -152,8 +152,13 @@ def is_valid_input(input_list):
         input_valid = False
     return input_valid
 
-def square_already_targeted(row, column, board):
-    return False
+def coords_already_targeted(row, column, board):
+    already_targeted = False
+    markers = ["-", "*", "B", "C", "D", "S"]
+    for marker in markers:
+        if board[row][column]==marker:
+            already_targeted = True
+    return already_targeted
 
 def create_board():
     """
