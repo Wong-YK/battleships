@@ -139,6 +139,10 @@ def are_unsunk_ships_left(fleet):
         else: continue
     return False
 
+def is_valid_input(string):
+    return True
+
+
 def create_board():
     """
     returns list of lists that serves as a  representation of the game board
