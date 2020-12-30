@@ -146,6 +146,8 @@ def is_valid_input(string):
         for i in range(len(input_list)):
             input_list[i]=int(input_list[i])
     except: input_valid = False
+    if len(input_list)>2:
+        input_valid = False
     return input_valid
 
 
