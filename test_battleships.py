@@ -639,8 +639,43 @@ def test_is_valid_input6():
     #integer less than 0
     assert is_valid_input(["-3", "1"])==False
 
-def test_square_already_targeted1():
+def test_coords_already_targeted1():
     #square not already targeted
     b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
-    assert square_already_targeted(0, 0 , b)==False
+    assert coords_already_targeted(0, 0 , b)==False
 
+def test_coords_already_targeted2():
+    #previous miss
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    b[5][1]="-"
+    assert coords_already_targeted(5, 1 , b)==True
+
+def test_coords_already_targeted2():
+    #previous hit
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    b[3][7]="*"
+    assert coords_already_targeted(3, 7 , b)==True
+
+def test_coords_already_targeted3():
+    #previous hit (battleship sunk)
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    b[8][0]="B"
+    assert coords_already_targeted(8, 0 , b)==True
+
+def test_coords_already_targeted4():
+    #previous hit (cruiser sunk)
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    b[4][9]="C"
+    assert coords_already_targeted(4, 9 , b)==True
+
+def test_coords_already_targeted5():
+    #previous hit (destroyer sunk)
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    b[0][9]="D"
+    assert coords_already_targeted(0, 9 , b)==True
+
+def test_coords_already_targeted6():
+    #previous hit (submarine sunk)
+    b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
+    b[6][9]="S"
+    assert coords_already_targeted(6, 9 , b)==True
