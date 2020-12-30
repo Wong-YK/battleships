@@ -140,7 +140,13 @@ def are_unsunk_ships_left(fleet):
     return False
 
 def is_valid_input(string):
-    return True
+    input_list = string.split()
+    input_valid = True
+    try:
+        for i in range(len(input_list)):
+            input_list[i]=int(input_list[i])
+    except: input_valid = False
+    return input_valid
 
 
 def create_board():

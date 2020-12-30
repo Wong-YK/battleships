@@ -616,9 +616,19 @@ def test_update_board_sink2():
     assert board[5][4]=="S"
 
 def test_is_valid_input1():
-    #input of the form "x y" where 0<=x<=9 and 0<=y<=9
+    #valid input of the form "x y" where 0<=x<=9 and 0<=y<=9
     assert is_valid_input("0 9")==True
 
+def test_is_valid_input2():
+    #floating point values
+    assert is_valid_input("1.9 7")==False
 
+def test_is_valid_input3():
+    #string
+    assert is_valid_input("Hello there")==False
+
+def test_is_valid_input4():
+    #too many integers
+    assert is_valid_input("1 2 3")==False
 
 
