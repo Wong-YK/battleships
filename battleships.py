@@ -152,70 +152,11 @@ def is_valid_input(input_list):
         input_valid = False
     return input_valid
 
-def coords_already_targeted(row, column, board):
+def coords_already_targeted(row, column, shots_fired):
     already_targeted = False
-    markers = ["-", "*", "B", "C", "D", "S"]
-    for marker in markers:
-        if board[row][column]==marker:
-            already_targeted = True
+    if (row, column) in shots_fired:
+        already_targeted = True
     return already_targeted
-
-def create_board():
-    """
-    returns list of lists that serves as a  representation of the game board
-    in its initial state (i.e. no shots fired); this representation will be
-    used for the graphics element of the game
-    """
-    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
-    return board
-
-def update_board_hit(row, col, board):
-    """"
-    returns list of lists to represent updated game board following a hit which
-    is denoted by a "*"
-    """
-    board[row][col] = "*"
-
-def update_board_miss(row, col, board):
-    """
-    returns list of lists to represent updated game board following a miss which
-    is denoted by a "-"
-    """
-    board[row][col] = "-"
-
-def update_board_sink(ship_sunk, board):
-    """
-    returns list of lists to represent updated game board following a sink which
-    is denoted by a "B" if a battleship is sunk, a "C if a cruiser is sunk, a
-    "D" if a destroyer is sunk and a "S" if a submarine is sunk
-       """
-    #Determine markers based on ship type
-    if ship_type(ship_sunk)=="battleship":
-        ship_sunk_type = "B"
-    elif ship_type(ship_sunk)=="cruiser":
-        ship_sunk_type = "C"
-    elif ship_type(ship_sunk)=="destroyer":
-        ship_sunk_type = "D"
-    else:
-        ship_sunk_type = "S"
-
-    #Apply markers to board
-    for (row, col) in ship_sunk[4]:
-        board[row][col] = ship_sunk_type
-
-def print_board(board):
-    """
-    prints representation of game board along with column and row markers
-    """
-    print("\t"+"0  1  2  3  4  5  6  7  8  9")
-    print("\t"+"-"*28)
-    for i in range(len(board)):
-        print(i, "|", end=" ")
-        for j in range(len(board[i])):
-            if j<9:
-                print(board[i][j], end="  ")
-            else:
-                print(board[i][j])
 
 def main():
     """
@@ -227,10 +168,8 @@ def main():
     """
     current_fleet = randomly_place_all_ships()
 
-    current_board = create_board()
-
     game_over = False
-    shots = 0
+    shots = set()
 
     while not game_over:
         loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
@@ -241,27 +180,22 @@ def main():
         else:
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
-            if coords_already_targeted(current_row, current_column, current_board):
+            if coords_already_targeted(current_row, current_column, shots):
                 print("You have already targeted these coordinates, please try again")
                 continue
             else:
-                shots += 1
+                shots|={(current_row, current_column)}
                 if check_if_hits(current_row, current_column, current_fleet):
-                    update_board_hit(current_row, current_column, current_board)
                     print("You have a hit!")
                     (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
                     if is_sunk(ship_hit):
                         print("You sank a " + ship_type(ship_hit) + "!")
-                        update_board_sink(ship_hit, current_board)
                 else:
                     print("You missed!")
-                    update_board_miss(current_row, current_column, current_board)
-
-        print_board(current_board)
 
         if not are_unsunk_ships_left(current_fleet): game_over = True
 
-    if game_over: print("Game over! You required", shots, "shots.")
+    if game_over: print("Game over! You required", len(shots), "shots.")
     else: print("Sorry to see you go, come back and play anytime!")
 
 
