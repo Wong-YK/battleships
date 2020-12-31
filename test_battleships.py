@@ -216,15 +216,15 @@ def test_place_ship_at1():
          (6, 2, True, 1, set()),
          (6, 4, True, 1, set())]
     f1 = [(0, 0, True, 4, set()),
-           (2, 0, True, 3, set()),
-           (2, 4, True, 3, set()),
-           (4, 0, True, 2, set()),
-           (4, 3, True, 2, set()),
-           (4, 6, True, 2, set()),
-           (6, 0, True, 1, set()),
-           (6, 2, True, 1, set()),
-           (6, 4, True, 1, set()),
-           (6, 6, True, 1, set())]
+          (2, 0, True, 3, set()),
+          (2, 4, True, 3, set()),
+          (4, 0, True, 2, set()),
+          (4, 3, True, 2, set()),
+          (4, 6, True, 2, set()),
+          (6, 0, True, 1, set()),
+          (6, 2, True, 1, set()),
+          (6, 4, True, 1, set()),
+          (6, 6, True, 1, set())]
     for ship in f1:
         assert ship in place_ship_at(6, 6, True, 1, f)
     #provide at least five tests in total for place_ship_at by the project submission deadline
@@ -589,32 +589,6 @@ def test_are_unsunk_ships_left5():
          (9, 8, True, 1, {(9, 8)})]
     assert are_unsunk_ships_left(f)==True
 
-def test_update_board_hit1():
-    #hit to (0, 0)
-    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
-    updated = update_board_hit(0, 0, board)
-    assert updated[0][0]=="*"
-
-def test_update_board_miss1():
-    #miss to (1, 3)
-    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
-    updated = update_board_miss(1, 3, board)
-    assert updated[1][3]=="-"
-
-def test_update_board_sink1():
-    #sink a cruiser
-    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
-    ship_sunk = (1, 0, True, 3, {(1, 0), (1, 1), (1, 2)})
-    update_board_sink(ship_sunk, board)
-    assert board[1][0]=="C" and board[1][1]=="C" and board[1][2]=="C"
-
-def test_update_board_sink2():
-    #sink a submarine
-    board = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
-    ship_sunk = (5, 4, True, 1, {(5, 4)})
-    update_board_sink(ship_sunk, board)
-    assert board[5][4]=="S"
-
 def test_is_valid_input1():
     #valid input of the form "x y" where 0<=x<=9 and 0<=y<=9
     assert is_valid_input(["0", "9"])==True
@@ -650,31 +624,31 @@ def test_coords_already_targeted2():
     b[5][1]="-"
     assert coords_already_targeted(5, 1 , b)==True
 
-def test_coords_already_targeted2():
+def test_coords_already_targeted3():
     #previous hit
     b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     b[3][7]="*"
     assert coords_already_targeted(3, 7 , b)==True
 
-def test_coords_already_targeted3():
+def test_coords_already_targeted4():
     #previous hit (battleship sunk)
     b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     b[8][0]="B"
     assert coords_already_targeted(8, 0 , b)==True
 
-def test_coords_already_targeted4():
+def test_coords_already_targeted5():
     #previous hit (cruiser sunk)
     b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     b[4][9]="C"
     assert coords_already_targeted(4, 9 , b)==True
 
-def test_coords_already_targeted5():
+def test_coords_already_targeted6():
     #previous hit (destroyer sunk)
     b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     b[0][9]="D"
     assert coords_already_targeted(0, 9 , b)==True
 
-def test_coords_already_targeted6():
+def test_coords_already_targeted7():
     #previous hit (submarine sunk)
     b = [[".", ".", ".", ".", ".", ".", ".", ".", ".", "."] for i in range(10)]
     b[6][9]="S"
