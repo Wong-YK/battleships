@@ -43,16 +43,15 @@ def is_open_sea(row, column, fleet):
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     """
     checks if addition of a ship, specified by row, column, horizontal, and
-    length, to the fleet results in a legal arrangement (see the figure above).
-    If so, the function returns Boolean True and it returns False otherwise.
-    This function makes use of the function is_open_sea
+    length, to the fleet results in a legal arrangement. If so, the function
+    returns Boolean True and it returns False otherwise. This function makes
+    use of the function is_open_sea
     """
     ship_coords = set()
-    if horizontal:
-        for i in range(length):
+    for i in range(length):
+        if horizontal:
             ship_coords|={(row, column+i)}
-    else:
-        for i in range(length):
+        else:
             ship_coords|={(row+i, column)}
     ok = True
     for coord in ship_coords:
