@@ -77,37 +77,39 @@ def randomly_place_all_ships():
     returns a fleet that is a result of a random legal arrangement of the 10 ships in the
     ocean. This function makes use of the functions ok_to_place_ship_at and place_ship_at
     """
-    f = []
+    fleet = []
     lengths = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
     for length in lengths:
-        # find a legal placement
+        #find a random legal placement
         placement_legal = False
         while not placement_legal:
             row = random.randrange(0, 10)
             col = random.randrange(0, 10)
-            h = random.choice([True, False])
-            placement_legal = ok_to_place_ship_at(row, col, h, length, f)
-        # add ship to fleet
-        f = place_ship_at(row, col, h, length, f)
-    return f
+            horizontal = random.choice([True, False])
+            placement_legal = ok_to_place_ship_at(row, col, horizontal, length, fleet)
+        #add legally placed ship to fleet
+        fleet = place_ship_at(row, col, horizontal, length, fleet)
+    return fleet
 
 def check_if_hits(row, column, fleet):
     """
     returns Boolean value, which is True if the shot of the human player at the square
     represented by row and column hits any of the ships of fleet, and False otherwise
     """
+    #compile coordinates occupied by all ships in fleet
     ship_coords = set()
     for ship in fleet:
-        if ship[2]:
-            for i in range(ship[3]):
+        for i in range(ship[3]):
+            if ship[2]:
                 ship_coords |= {(ship[0], ship[1] + i)}
-        else:
-            for i in range(ship[3]):
+            else:
                 ship_coords |= {(ship[0] + i, ship[1])}
+    #check if any of the coordinates occupied by a ship matches those of the shot
     hit = False
     for coord in ship_coords:
-        if row==coord[0] and column==coord[1]:
+        if (row, column)==coord:
             hit = True
+            break
         else: continue
     return hit
 
