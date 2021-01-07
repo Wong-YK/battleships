@@ -47,17 +47,20 @@ def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     returns Boolean True and it returns False otherwise. This function makes
     use of the function is_open_sea
     """
+    #compile coordinates that the ship occupies
     ship_coords = set()
     for i in range(length):
         if horizontal:
             ship_coords|={(row, column+i)}
         else:
             ship_coords|={(row+i, column)}
+    #check that each coordinate the ship occupies is within the confines of the
+    #board and is in open sea
     ok = True
     for coord in ship_coords:
-        if coord[0]<0 or coord[0]>9: ok = False
-        if coord[1]<0 or coord[1]>9: ok = False
-        if not is_open_sea(coord[0], coord[1], fleet): ok = False
+        if (coord[0]<0 or coord[0]>9 or coord[1]<0 or coord[1]>9
+            or not is_open_sea(coord[0], coord[1], fleet)): ok = False
+        else: continue
     return ok
 
 def place_ship_at(row, column, horizontal, length, fleet):
