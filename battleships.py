@@ -28,24 +28,24 @@ def is_open_sea(row, column, fleet):
     (horizontally, vertically, or diagonally) to some ship in fleet. Returns Boolean
     True if so and False otherwise
     """
-    ship_squares=set()
+    occupied_adjacent=set()
     for ship in fleet:
-        if ship[2]:
-            for i in range(-1, ship[3]+1):
-                ship_squares|={(ship[0], (ship[1]+i)), ((ship[0]-1), (ship[1]+i)), ((ship[0]+1), (ship[1]+i))}
-        else:
-            for i in range(-1, ship[3]+1):
-                ship_squares|={((ship[0]+i), ship[1]), ((ship[0]+i), (ship[1]-1)), ((ship[0]+i), (ship[1]+1))}
-    if (row, column) in ship_squares: return False
+        for i in range(-1, ship[3] + 1):
+            if ship[2]:
+                #compiles occupied and adjacent squares for horizontal ships
+                occupied_adjacent|={(ship[0], (ship[1]+i)), ((ship[0]-1), (ship[1]+i)), ((ship[0]+1), (ship[1]+i))}
+            else:
+                #compiles occupied and adjacent squares for vertical ships
+                occupied_adjacent|={((ship[0]+i), ship[1]), ((ship[0]+i), (ship[1]-1)), ((ship[0]+i), (ship[1]+1))}
+    if (row, column) in occupied_adjacent: return False
     else: return True
 
 def ok_to_place_ship_at(row, column, horizontal, length, fleet):
     """
     checks if addition of a ship, specified by row, column, horizontal, and
-    length as in ship representation above, to the fleet results in a legal
-    arrangement (see the figure above). If so, the function returns Boolean
-    True and it returns False otherwise. This function makes use of the function
-    is_open_sea
+    length, to the fleet results in a legal arrangement (see the figure above).
+    If so, the function returns Boolean True and it returns False otherwise.
+    This function makes use of the function is_open_sea
     """
     ship_coords = set()
     if horizontal:
