@@ -115,23 +115,24 @@ def check_if_hits(row, column, fleet):
 
 def hit(row, column, fleet):
     """
-    returns a tuple (fleet1, ship) where ship is the ship from the fleet fleet that
-    receives a hit by the shot at the square represented by row and column, and fleet1
-    is the fleet resulting from this hit. It may be assumed that shooting at the square
-    row, column results in hitting of some ship in fleet
+    returns a tuple (fleet1, ship) where ship is the ship from the fleet that receives
+    a hit by the shot at the square represented by row and column, and fleet1 is the
+    fleet resulting from this hit. It may be assumed that shooting at the square row,
+    column results in hitting of some ship in fleet
     """
     for ship in fleet:
+        #determine the coordinates of a particular ship
         ship_coords = set()
-        if ship[2]:
-            for i in range(ship[3]):
+        for i in range(ship[3]):
+            if ship[2]:
                 ship_coords |= {(ship[0], ship[1] + i)}
-        else:
-            for i in range(ship[3]):
+            else:
                 ship_coords |= {(ship[0] + i, ship[1])}
+        #determine if the hit coordinates match any of the ship's coordinates
         if (row, column) in ship_coords:
-            i = fleet.index(ship)
-            fleet[i][4].add((row, column))
+            ship[4].add((row, column))
             return (fleet, ship)
+        else: continue
 
 def are_unsunk_ships_left(fleet):
     """
