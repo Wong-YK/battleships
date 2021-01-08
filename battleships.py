@@ -202,20 +202,17 @@ def main():
         else:
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
-            #if coorinates targeted have already been shot at, prompt player for different input
-            if coords_already_targeted(current_row, current_column, shots):
-                print("You have already targeted these coordinates, please try again")
-                continue
+            if (not check_if_hits(current_row, current_column, current_fleet)
+                or coords_already_targeted(current_row, current_column, shots)):
+                print("You missed!")
             else:
-                #if a ship is hit or sunk notify player and update fleet
-                shots|={(current_row, current_column)}
-                if check_if_hits(current_row, current_column, current_fleet):
-                    print("You have a hit!")
-                    (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
-                    if is_sunk(ship_hit):
-                        print("You sank a " + ship_type(ship_hit) + "!")
+                print("You have a hit!")
+                (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
+                if is_sunk(ship_hit):
+                    print("You sank a " + ship_type(ship_hit) + "!")
                 else:
-                    print("You missed!")
+                    continue
+            shots |= {(current_row, current_column)}
 
         if not are_unsunk_ships_left(current_fleet): game_over = True
 
