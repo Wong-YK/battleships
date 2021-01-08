@@ -146,12 +146,18 @@ def are_unsunk_ships_left(fleet):
     return False
 
 def is_valid_input(input_list):
+    """
+    takes a list, generated from player input specifying coordinates of a shot, and
+    returns True if the list contains exactly two integers which are both less than 10 and
+    greater than or equal to 0 and false otherwise
+    """
     input_list_copy = copy.deepcopy(input_list)
     input_valid = True
+    #checks if list items can be converted to integers and, if so, are they greater than or
     try:
         for i in range(len(input_list_copy)):
             input_list_copy[i]=int(input_list_copy[i])
-        if len(input_list_copy) > 2 or input_list_copy[0] < 0 or input_list_copy[0] > 9 or input_list_copy[1] < 0 or input_list_copy[1] > 9:
+        if len(input_list_copy) != 2 or input_list_copy[0] < 0 or input_list_copy[0] > 9 or input_list_copy[1] < 0 or input_list_copy[1] > 9:
                 input_valid = False
     except:
         input_valid = False
