@@ -166,6 +166,12 @@ def is_valid_input(input_list):
     return input_valid
 
 def coords_already_targeted(row, column, shots_fired):
+    """
+    takes two integers specifying the row and column of the square that the player is
+    currently targeting in addition to a set which contains a record of squares that have
+    been previously shot at; returns True if the square currently being targeted has
+    previously been shot at and False if otherwise
+    """
     already_targeted = False
     if (row, column) in shots_fired:
         already_targeted = True
