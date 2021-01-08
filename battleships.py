@@ -189,7 +189,7 @@ def main():
     current_fleet = randomly_place_all_ships()
 
     game_over = False
-    shots = set()
+    shots = []
 
     while not game_over:
         loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
@@ -210,9 +210,7 @@ def main():
                 (current_fleet, ship_hit) = hit(current_row, current_column, current_fleet)
                 if is_sunk(ship_hit):
                     print("You sank a " + ship_type(ship_hit) + "!")
-                else:
-                    continue
-            shots |= {(current_row, current_column)}
+            shots.append((current_row, current_column))
 
         if not are_unsunk_ships_left(current_fleet): game_over = True
 
