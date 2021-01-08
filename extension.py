@@ -71,18 +71,23 @@ def main():
 
     while not game_over:
         loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
+        #quit game if player inputs "q"
         if loc_str==["q"]: break
-        elif battleships.is_valid_input(loc_str)==False:
+        #if input is not valid prompt player for valid input
+        elif not battleships.is_valid_input(loc_str):
             print("Invalid input, please try again")
             continue
         else:
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
+            #if coorinates targeted have already been shot at, prompt player for different input
             if battleships.coords_already_targeted(current_row, current_column, current_board):
                 print("You have already targeted these coordinates, please try again")
                 continue
             else:
                 shots|={(current_row, current_column)}
+                #if the shot is a miss, a ship is hit or a ship is sunk notify player, update
+                #fleet (if applicable), update board and print board
                 if battleships.check_if_hits(current_row, current_column, current_fleet):
                     update_board_hit(current_row, current_column, current_board)
                     print("You have a hit!")
