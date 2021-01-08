@@ -172,9 +172,10 @@ def coords_already_targeted(row, column, shots_fired):
     been previously shot at; returns True if the square currently being targeted has
     previously been shot at and False if otherwise
     """
-    already_targeted = False
     if (row, column) in shots_fired:
         already_targeted = True
+    else:
+        already_targeted = False
     return already_targeted
 
 def main():
@@ -192,17 +193,21 @@ def main():
 
     while not game_over:
         loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
+        #quit game if player inputs "q"
         if loc_str==["q"]: break
-        elif is_valid_input(loc_str)==False:
+        #if input is not valid prompt player for valid input
+        elif not is_valid_input(loc_str):
             print("Invalid input, please try again")
             continue
         else:
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
+            #if coorinates targeted have already been shot at, prompt player for different input
             if coords_already_targeted(current_row, current_column, shots):
                 print("You have already targeted these coordinates, please try again")
                 continue
             else:
+                #if a ship is hit or sunk notify player and update fleet
                 shots|={(current_row, current_column)}
                 if check_if_hits(current_row, current_column, current_fleet):
                     print("You have a hit!")
