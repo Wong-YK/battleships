@@ -12,23 +12,21 @@ def create_board():
 
 def update_board_hit(row, col, board):
     """"
-    returns list of lists to represent updated game board following a hit which
-    is denoted by a "*"
+    updates board following a hit, marking the square with "*"
     """
     board[row][col] = "*"
 
 def update_board_miss(row, col, board):
     """
-    returns list of lists to represent updated game board following a miss which
-    is denoted by a "-"
+    updates board following a miss, marking the square with "-"
     """
     board[row][col] = "-"
 
 def update_board_sink(ship_sunk, board):
     """
-    returns list of lists to represent updated game board following a sink which
-    is denoted by a "B" if a battleship is sunk, a "C if a cruiser is sunk, a
-    "D" if a destroyer is sunk and a "S" if a submarine is sunk
+    updates board following the sinking of a ship, marking all squares that the ship occupied with a
+    "B" if it is a battleship, "C" if it is a cruiser, "D" if it is a destroyer and "S" if it is a
+    submarine
        """
     #Determine markers based on ship type
     if battleships.ship_type(ship_sunk)=="battleship":
@@ -50,13 +48,11 @@ def print_board(board):
     """
     print("\t"+"0  1  2  3  4  5  6  7  8  9")
     print("\t"+"-"*28)
-    for i in range(len(board)):
+    for i in range(10):
         print(i, "|", end=" ")
-        for j in range(len(board[i])):
-            if j<9:
-                print(board[i][j], end="  ")
-            else:
-                print(board[i][j])
+        for j in range(10)):
+            if j<9: print(board[i][j], end="  ")
+            else: print(board[i][j])
 
 def main():
     """
