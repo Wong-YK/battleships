@@ -365,7 +365,7 @@ def test_check_if_hits1():
     #provide at least five tests in total for check_if_hits by the project submission deadline
 
 def test_check_if_hits2():
-    #no hit (adjacent)
+    #no hit
     f = [(0, 0, False, 2, set()),
          (1, 3, True, 4, set()),
          (1, 9, True, 1, set()),
@@ -379,7 +379,7 @@ def test_check_if_hits2():
     assert check_if_hits(0, 5, f)==False
 
 def test_check_if_hits3():
-    #hit (not top left square)
+    #hit to horizontal cruiser (not top left square)
     f = [(0, 0, False, 2, set()),
          (1, 3, True, 4, set()),
          (1, 9, True, 1, set()),
@@ -421,7 +421,7 @@ def test_check_if_hits5():
     assert check_if_hits(5, 3, f)==True
 
 def test_hit1():
-    #hit to submarine on top left square
+    #hit to submarine
     f = [(0, 0, True, 4, set()),
          (2, 0, True, 3, set()),
          (2, 4, True, 3, set()),
@@ -493,7 +493,7 @@ def test_hit3():
     assert hit(7, 9, f)==(f_1, f_1[7])
 
 def test_hit4():
-    #hit to horizontal destroyer on non-top left square
+    #hit to vertical destroyer on non-top left square
     f = [(0, 0, False, 2, set()),
          (1, 3, True, 4, set()),
          (1, 9, True, 1, set()),
@@ -517,7 +517,7 @@ def test_hit4():
     assert hit(5, 7, f)==(f_1, f_1[4])
 
 def test_hit5():
-    #hit to horizontal destroyer on non-top left square
+    #hit to horizontal cruiser on non-top left square
     f = [(0, 0, False, 2, set()),
          (1, 3, True, 4, set()),
          (1, 9, True, 1, set()),
@@ -531,17 +531,16 @@ def test_hit5():
     f_1 = [(0, 0, False, 2, set()),
            (1, 3, True, 4, set()),
            (1, 9, True, 1, set()),
-           (3, 3, True, 3, {(3, 3)}),
+           (3, 3, True, 3, {(3, 5)}),
            (4, 7, False, 2, {(4, 7)}),
            (5, 2, True, 2, set()),
            (6, 0, False, 3, set()),
            (7, 2, True, 1, set()),
            (7, 5, True, 1, set()),
            (9, 8, True, 1, set())]
-    assert hit(3, 3, f)==(f_1, f_1[3])
+    assert hit(3, 5, f)==(f_1, f_1[3])
 
 def test_are_unsunk_ships_left1():
-    # provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
     #Just one submarine sunk
     f = [(0, 0, True, 4, set()),
          (2, 0, True, 3, set()),
@@ -557,7 +556,6 @@ def test_are_unsunk_ships_left1():
     assert are_unsunk_ships_left(f)==True
 
 def test_are_unsunk_ships_left2():
-    # provide at least five tests in total for are_unsunk_ships_left by the project submission deadline
     #Everything sunk
     f = f = [(1, 2, False, 2, {(1, 2), (2, 2)}),
              (2, 6, True, 3, {(2, 6), (2, 7), (2, 8)}),
@@ -614,27 +612,27 @@ def test_are_unsunk_ships_left5():
     assert are_unsunk_ships_left(f)==True
 
 def test_is_valid_input1():
-    #valid input of the form "x y" where 0<=x<=9 and 0<=y<=9
+    #list contains valid input
     assert is_valid_input(["0", "9"])==True
 
 def test_is_valid_input2():
-    #floating point values
+    #floating point value
     assert is_valid_input(["1.9", "7"])==False
 
 def test_is_valid_input3():
-    #string
+    #Non-numerical characters
     assert is_valid_input(["Hello", "there"])==False
 
 def test_is_valid_input4():
-    #too many integers
+    #too many list items
     assert is_valid_input(["1", "2", "3"])==False
 
 def test_is_valid_input5():
-    #integer greater than 9
+    #greater than 9
     assert is_valid_input(["1", "11"])==False
 
 def test_is_valid_input6():
-    #integer less than 0
+    #less than 0
     assert is_valid_input(["-3", "1"])==False
 
 def test_coords_already_targeted1():
