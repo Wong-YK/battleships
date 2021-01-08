@@ -9,7 +9,7 @@ def test_is_sunk1():
 def test_is_sunk2():
     #submarine is not sunk
     s = (0, 7, True, 1, set())
-    assert is_sunk(s)==False
+    assert is_sunk(s) == False
 
 def test_is_sunk3():
     #horizontal battleship is sunk
@@ -43,7 +43,7 @@ def test_ship_type3():
     assert ship_type(s)=="destroyer"
 
 def test_ship_type4():
-    #destroyer
+    #submarine
     s = (5, 8, True, 1, {(5, 8)})
     assert ship_type(s)=="submarine"
 
@@ -55,7 +55,7 @@ def test_ship_type5():
 
 
 def test_is_open_sea1():
-    #free square
+    #free square not adjacent
     f = [(0, 0, True, 4, set()),
          (2, 0, True, 3, set()),
          (2, 4, True, 3, set()),
@@ -66,7 +66,7 @@ def test_is_open_sea1():
          (6, 2, True, 1, set()),
          (6, 4, True, 1, set()),
          (6, 6, True, 1, set())]
-    assert is_open_sea(6, 6, f)==False
+    assert is_open_sea(9, 8, f)==True
 
 def test_is_open_sea2():
     #occupied square (top left square of ship)
