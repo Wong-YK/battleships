@@ -50,7 +50,7 @@ def print_board(board):
     print("\t"+"-"*28)
     for i in range(10):
         print(i, "|", end=" ")
-        for j in range(10)):
+        for j in range(10):
             if j<9: print(board[i][j], end="  ")
             else: print(board[i][j])
 
@@ -80,24 +80,19 @@ def main():
         else:
             current_row = int(loc_str[0])
             current_column = int(loc_str[1])
-            #if coorinates targeted have already been shot at, prompt player for different input
-            if battleships.coords_already_targeted(current_row, current_column, current_board):
-                print("You have already targeted these coordinates, please try again")
-                continue
-            else:
-                shots|={(current_row, current_column)}
-                #if the shot is a miss, a ship is hit or a ship is sunk notify player, update
-                #fleet (if applicable), update board and print board
-                if battleships.check_if_hits(current_row, current_column, current_fleet):
-                    update_board_hit(current_row, current_column, current_board)
-                    print("You have a hit!")
-                    (current_fleet, ship_hit) = battleships.hit(current_row, current_column, current_fleet)
-                    if battleships.is_sunk(ship_hit):
-                        print("You sank a " + battleships.ship_type(ship_hit) + "!")
-                        update_board_sink(ship_hit, current_board)
-                else:
-                    print("You missed!")
+            if (not battleships.check_if_hits(current_row, current_column, current_fleet)
+                or battleships.coords_already_targeted(current_row, current_column, shots)):
+                print("You missed!")
+                if not battleships.coords_already_targeted(current_row, current_column, shots):
                     update_board_miss(current_row, current_column, current_board)
+            else:
+                update_board_hit(current_row, current_column, current_board)
+                print("You have a hit!")
+                (current_fleet, ship_hit) = battleships.hit(current_row, current_column, current_fleet)
+                if battleships.is_sunk(ship_hit):
+                    print("You sank a " + battleships.ship_type(ship_hit) + "!")
+                    update_board_sink(ship_hit, current_board)
+            shots |= {(current_row, current_column)}
 
         print_board(current_board)
 
