@@ -152,13 +152,15 @@ def is_valid_input(input_list):
     greater than or equal to 0 and false otherwise
     """
     input_list_copy = copy.deepcopy(input_list)
-    input_valid = True
-    #checks if list items can be converted to integers and, if so, are they greater than or
     try:
         for i in range(len(input_list_copy)):
             input_list_copy[i]=int(input_list_copy[i])
-        if len(input_list_copy) != 2 or input_list_copy[0] < 0 or input_list_copy[0] > 9 or input_list_copy[1] < 0 or input_list_copy[1] > 9:
+        if (len(input_list_copy)!=2
+            or input_list_copy[0] < 0 or input_list_copy[0] > 9
+            or input_list_copy[1] < 0 or input_list_copy[1] > 9):
                 input_valid = False
+        else:
+            input_valid = True
     except:
         input_valid = False
     return input_valid
