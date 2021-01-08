@@ -191,18 +191,43 @@ def test_ok_to_place_ship_at4():
     assert ok_to_place_ship_at(9, 9, True, 3, f) == False
 
 def test_ok_to_place_ship_at5():
-    #place destroyer that occupies an adjecent square to a battleship
+    #place submarine that occupies a horizontally adjecent square to a battleship
     f = [(0, 1, True, 2, set()),
          (0, 7, False, 4, set()),
          (3, 2, True, 3, set()),
          (4, 0, True, 1, set()),
          (5, 6, True, 1, set()),
          (6, 0, False, 2, set()),
-         (6, 2, True, 1, set()),
+         (6, 2, True, 2, set()),
          (7, 5, True, 3, set()),
          (8, 9, True, 1, set())]
-    assert ok_to_place_ship_at(3, 8, False, 2, f) == False
+    assert ok_to_place_ship_at(3, 8, False, 1, f) == False
 
+def test_ok_to_place_ship_at6():
+    #place submarine that occupies a vertically adjecent square to a destroyer
+    f = [(0, 1, True, 2, set()),
+         (0, 7, False, 4, set()),
+         (3, 2, True, 3, set()),
+         (4, 0, True, 1, set()),
+         (5, 6, True, 1, set()),
+         (6, 0, False, 2, set()),
+         (6, 2, True, 2, set()),
+         (7, 5, True, 3, set()),
+         (8, 9, True, 1, set())]
+    assert ok_to_place_ship_at(8, 0, True, 1, f) == False
+
+def test_ok_to_place_ship_at7():
+    #place submarine that occupies a diagonally adjecent square to a destroyer
+    f = [(0, 1, True, 2, set()),
+         (0, 7, False, 4, set()),
+         (3, 2, True, 3, set()),
+         (4, 0, True, 1, set()),
+         (5, 6, True, 1, set()),
+         (6, 0, False, 2, set()),
+         (6, 2, True, 2, set()),
+         (7, 5, True, 3, set()),
+         (8, 9, True, 1, set())]
+    assert ok_to_place_ship_at(1, 0, True, 1, f) == False
 
 def test_place_ship_at1():
     #placing submarine in open sea
@@ -227,7 +252,6 @@ def test_place_ship_at1():
           (6, 6, True, 1, set())]
     for ship in f1:
         assert ship in place_ship_at(6, 6, True, 1, f)
-    #provide at least five tests in total for place_ship_at by the project submission deadline
 
 def test_place_ship_at2():
     #placing horizontal cruiser in open sea
