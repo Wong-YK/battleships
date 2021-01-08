@@ -67,7 +67,7 @@ def main():
     current_board = create_board()
 
     game_over = False
-    shots = set()
+    shots = []
 
     while not game_over:
         loc_str = input("Enter row and column to shoot (separted by space) or enter q to quit: ").split()
@@ -92,7 +92,7 @@ def main():
                 if battleships.is_sunk(ship_hit):
                     print("You sank a " + battleships.ship_type(ship_hit) + "!")
                     update_board_sink(ship_hit, current_board)
-            shots |= {(current_row, current_column)}
+            shots.append((current_row, current_column))
 
         print_board(current_board)
 
